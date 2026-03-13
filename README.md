@@ -125,8 +125,3 @@ student-prompts/
 
 Keep this repo as the **reference** and adapt the teaching repo as needed (pace, deadlines, rubrics, cohort tooling).
 
-## Suggested next steps
-
-- Add a short `README.md` inside each chapter folder explaining what to learn and which Java files to run.
-- Add a simple checklist in `resources/` (study plan + prerequisites).
-- Create minimal Java stubs (empty classes + `main` methods) for each example listed above, so beginners can open, run, and then gradually fill them in.
