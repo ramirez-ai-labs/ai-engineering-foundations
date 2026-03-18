@@ -1,5 +1,5 @@
 /**
- * Binary search — O(log n) search in a sorted array.
+ * Binary search - O(log n) search in a sorted array.
  *
  * Prerequisite: array must be sorted. Used in many "find boundary" and
  * "search in sorted space" problems.

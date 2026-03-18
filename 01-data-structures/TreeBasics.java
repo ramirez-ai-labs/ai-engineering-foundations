@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Binary tree basics — structure and traversals.
+ * Binary tree basics - structure and traversals.
  *
  * Trees show up in decision trees, parse trees, and (conceptually) in how we
  * reason about recursive structures. BST gives O(log n) search when balanced.
@@ -35,7 +35,7 @@ public class TreeBasics {
         preorder(node.right, out);
     }
 
-    /** Search in a BST — O(height), O(log n) if balanced */
+    /** Search in a BST - O(height), O(log n) if balanced */
     static boolean searchBST(TreeNode node, int target) {
         if (node == null) return false;
         if (node.value == target) return true;

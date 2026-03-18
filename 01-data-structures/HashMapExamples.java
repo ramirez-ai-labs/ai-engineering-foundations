@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Hash map — O(1) average lookup/insert/delete by key.
+ * Hash map - O(1) average lookup/insert/delete by key.
  *
  * In AI: vocabulary (token -> id), feature maps, caching embeddings by key.
  */
@@ -16,7 +16,7 @@ public class HashMapExamples {
         wordToId.put("ai", 3);
         System.out.println("wordToId: " + wordToId);
 
-        // 2. Get — O(1) average
+        // 2. Get - O(1) average
         System.out.println("id of 'ai': " + wordToId.get("ai"));
         System.out.println("id of 'missing': " + wordToId.get("missing")); // null
 

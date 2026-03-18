@@ -42,7 +42,7 @@ public class GraphDFSAndBFS {
         return order;
     }
 
-    /** BFS using queue — gives level-by-level order, shortest path in unweighted graph */
+    /** BFS using queue - gives level-by-level order, shortest path in an unweighted graph */
     static List<Integer> bfs(List<List<Integer>> adj, int start) {
         List<Integer> order = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();

@@ -1,21 +1,90 @@
-# 03 – Systems
+# 03 - Systems
 
-Connect CS theory to real systems you build with AI: caching, rate limiting, queues, and API design.
+This folder connects classical CS ideas to the kinds of systems AI engineers actually build and operate.
 
-## Files
+The examples here are intentionally small. They are not production-ready infrastructure. They are teaching examples that expose the main concepts directly:
 
-| File | Concepts |
-|------|----------|
-| `InMemoryCache.java` | Simple key-value cache with TTL / eviction |
-| `RateLimiter.java` | Token-bucket or fixed-window rate limiting |
-| `SimpleQueueDemo.java` | Queue as abstraction; producer/consumer pattern |
-| `RestApiDesignNotes.md` | API design principles and notes |
+- caching
+- rate limiting
+- queues
+- API design
 
-## How to run
+## Files In This Folder
+
+| File | What It Teaches | Important Limitation |
+|------|------------------|----------------------|
+| `InMemoryCache.java` | local cache, TTL, lazy expiration | single-process demo, not distributed and not thread-safe |
+| `RateLimiter.java` | fixed-window rate limiting | simplified implementation, not token bucket or sliding window |
+| `SimpleQueueDemo.java` | FIFO processing and queue behavior | not a real broker or concurrent queue system |
+| `RestApiDesignNotes.md` | API resource design, status codes, error shape, AI API concerns | note file only, not executable code |
+
+## How To Run
+
+From this folder:
 
 ```bash
-javac *.java && java InMemoryCache
-# or: java RateLimiter, java SimpleQueueDemo
+javac *.java
+java InMemoryCache
+java RateLimiter
+java SimpleQueueDemo
 ```
 
-Read `RestApiDesignNotes.md` for design concepts.
+Then read `RestApiDesignNotes.md` to connect the demos to actual service design.
+
+## What To Pay Attention To
+
+### InMemoryCache
+
+- a cache stores previously computed or fetched values
+- TTL means the value expires after some amount of time
+- this example uses lazy expiration, so cleanup happens during access or size checks
+- real systems usually use Redis, Memcached, or another external store
+
+### RateLimiter
+
+- rate limiting protects cost, reliability, and upstream dependencies
+- this example uses a fixed window, which is easy to understand but imperfect
+- fixed windows can create burstiness near window boundaries
+- production systems often use token bucket or sliding-window approaches
+
+### SimpleQueueDemo
+
+- queues process work in arrival order
+- they help decouple producers from consumers
+- queue semantics are central to task execution, background jobs, and event processing
+- this example is single-process and purely instructional
+
+### REST API Design Notes
+
+- good APIs are predictable and consistent
+- clients need stable status codes and error shapes
+- AI APIs often need extra care around rate limits, streaming, retries, and idempotency
+
+## Beginner Mistakes To Avoid
+
+- assuming a local in-memory cache behaves like a distributed cache
+- describing a fixed-window limiter as a token bucket
+- confusing a queue data structure with a durable message broker
+- designing API endpoints around verbs instead of resources
+
+## AI Engineering Connections
+
+- cache model outputs or embedding results to reduce cost and latency
+- rate-limit expensive inference or embedding endpoints
+- queue long-running jobs such as indexing, chunking, evaluation, or batch inference
+- expose AI services through clear, stable APIs
+
+## Suggested Follow-Up Work
+
+- extend `InMemoryCache.java` with a `containsKey` method
+- add a short sleep in `RateLimiter.java` to demonstrate a new time window
+- build a tiny producer/consumer example after `SimpleQueueDemo.java`
+- translate the REST notes into a small mock API spec
+
+## Exit Criteria
+
+You are ready to move on when you can:
+
+- explain what these examples simplify
+- describe where each concept fits in a real backend or AI platform
+- identify the difference between demo code and production architecture

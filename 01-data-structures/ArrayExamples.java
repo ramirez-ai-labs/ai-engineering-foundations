@@ -1,5 +1,5 @@
 /**
- * Array basics — indexing, iteration, and why they matter for AI.
+ * Array basics - indexing, iteration, and why they matter for AI.
  *
  * Arrays: contiguous memory, O(1) access by index, fixed size (in Java).
  * Used everywhere: batches of embeddings, token IDs, feature vectors.
@@ -11,7 +11,7 @@ public class ArrayExamples {
         int[] numbers = { 10, 20, 30, 40, 50 };
         System.out.println("Length: " + numbers.length); // 5
 
-        // 2. Indexing — O(1) access
+        // 2. Indexing - O(1) access
         System.out.println("numbers[2] = " + numbers[2]); // 30
 
         // 3. Iteration
@@ -34,7 +34,7 @@ public class ArrayExamples {
         System.out.println("Original [0]: " + numbers[0]); // still 10
         System.out.println("Copy [0]: " + copy[0]);       // 99
 
-        // 6. 2D array — e.g. batch of vectors (batch_size x dim)
+        // 6. 2D array - e.g. batch of vectors (batch_size x dim)
         int[][] batch = {
             { 1, 2, 3 },
             { 4, 5, 6 },

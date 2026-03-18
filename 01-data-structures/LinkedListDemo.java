@@ -1,5 +1,5 @@
 /**
- * Linked list — nodes connected by references. O(1) insert/delete at head (or tail with ref).
+ * Linked list - nodes connected by references. O(1) insert/delete at head (or tail with ref).
  * No random access; traversal is O(n).
  *
  * In practice you often use ArrayList for lists; linked lists appear in interviews and
@@ -45,7 +45,7 @@ public class LinkedListDemo {
         return len;
     }
 
-    /** Insert at head — O(1) */
+    /** Insert at head - O(1) */
     static Node insertAtHead(Node head, int value) {
         Node newHead = new Node(value);
         newHead.next = head;

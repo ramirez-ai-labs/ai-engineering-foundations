@@ -1,13 +1,43 @@
-# AI Engineer CS Refresh (Canonical Repo)
+# AI Engineer CS Refresh
 
-This repo is the **canonical source of truth** for the AI Engineer CS Refresh curriculum.
+This repository is a structured refresher for:
 
-- If you’re studying: start at `01-data-structures/` and go in order.
-- If you’re teaching (or adapting): keep this repo clean and stable, then adapt it in a separate teaching repo.
+- CS students who want stronger fundamentals before building AI systems
+- new engineers trying to get started in AI engineering
+- experienced engineers who want a compact, practical review of core topics
 
-## What’s inside (Java-first)
+The repo is organized like a short textbook. Each numbered folder is a chapter. The emphasis is on small examples, clear explanations, and direct links between CS fundamentals and modern AI work.
 
-Think of this repo like a **textbook**. Each numbered folder is a chapter.
+## Who This Repo Is For
+
+This repo is designed for learners who need:
+
+- a practical review of data structures and algorithms
+- systems concepts that matter in real AI platforms
+- a bridge from classical CS material to embeddings, vector search, and RAG
+- examples that are short enough to study but still technically honest
+
+If you want production-scale projects, use this repo as the foundation first. Then move into specialized labs or full applications.
+
+## Learning Path
+
+Work through the folders in order:
+
+1. `01-data-structures/`
+2. `02-algorithms/`
+3. `03-systems/`
+4. `04-ai-foundations/`
+5. `05-mini-projects/`
+
+Recommended approach:
+
+1. Read the folder README first.
+2. Compile and run each Java example.
+3. Read the code line by line and trace the output.
+4. Re-implement the example without looking.
+5. Explain how the concept shows up in AI engineering.
+
+## Repository Structure
 
 ```text
 /
@@ -17,111 +47,86 @@ Think of this repo like a **textbook**. Each numbered folder is a chapter.
 ├── 03-systems/
 ├── 04-ai-foundations/
 ├── 05-mini-projects/
-└── resources/
+├── resources/
+├── blog-assets/
+├── talks/
+└── workshop-notes/
 ```
 
-Everything is written with **Java** as the default language.
+Folder purpose:
 
-- **`01-data-structures/`**  
-  - Goal: refresh core structures you actually use in AI work.  
-  - Java examples: `ArrayExamples.java`, `HashMapExamples.java`, `LinkedListDemo.java`, `TreeBasics.java`, `GraphDFSAndBFS.java`.
-- **`02-algorithms/`**  
-  - Goal: light algorithm refresh, not competitive programming.  
-  - Focus topics: recursion, sorting, searching, Big‑O.  
-  - Java examples: `BinarySearch.java`, `MergeSort.java`, `TwoSum.java`, `TimeComplexityNotes.java`.
-- **`03-systems/`**  
-  - Goal: connect CS theory → real systems you build with AI.  
-  - Topics: distributed systems, caching, load balancing, queues, microservices, API design.  
-  - Java examples: `InMemoryCache.java`, `RateLimiter.java`, `SimpleQueueDemo.java`, `RestApiDesignNotes.md`.
-- **`04-ai-foundations/`**  
-  - Goal: explain the AI concepts students and engineers actually ask about.  
-  - Topics: gradient descent, backpropagation, embeddings, vector search, transformers, RAG.  
-  - Java examples: small demos using pseudocode or Java-style math utilities, plus links to Python notebooks where needed.
-- **`05-mini-projects/`**  
-  - Goal: tie everything together with small, realistic builds.  
-  - Examples: “search service with caching,” “simple vector search service,” “rate-limited API wrapper.”
-- **`resources/`**  
-  - Cheatsheets, diagrams, reading lists, and study plans.  
-  - Example files: `cs_refresh_checklist.md`, `systems_reading_list.md`, `ai_foundations_reading_list.md`.
+- `01-data-structures/`: arrays, hash maps, linked lists, trees, and graphs
+- `02-algorithms/`: searching, sorting, problem-solving patterns, and Big-O
+- `03-systems/`: caches, queues, rate limiting, and API design basics
+- `04-ai-foundations/`: the AI concepts learners need before building LLM systems
+- `05-mini-projects/`: integrated practice projects that combine several ideas
+- `resources/`: supporting notes, positioning, and study material
 
-## How to use this repo (beginners, in Java)
+## Language Choice
 
-**Step 1 – Algorithms & Data Structures (light refresh)**  
-- Go to `01-data-structures/` and `02-algorithms/`.  
-- Work through a **small set** of Java files, not hundreds of problems.  
-- Aim to understand and re‑implement, at minimum:
-  - Arrays and hash maps
-  - Linked lists, trees, graphs
-  - Recursion
-  - Sorting and searching
-  - Time complexity (Big‑O)
-- Suggested classic problems to mirror in Java:
-  - Two Sum  
-  - Binary Search  
-  - Reverse Linked List  
-  - DFS / BFS graph traversal  
-  - Merge Sort  
-- Use sites like LeetCode or HackerRank as **supplements**, not the main course.
+Java is the default language for the CS examples in this repository because:
 
-**Step 2 – Systems & Architecture (your strength)**  
-- Go to `03-systems/`.  
-- Map concepts you already know into small Java examples:
-  - Distributed systems and microservices
-  - Caching and load balancing
-  - Queues and messaging
-  - API design and rate limiting  
-- Recommended book: *Designing Data‑Intensive Applications* (Kleppmann). Use this folder to turn those ideas into tiny Java demos.
+- it is explicit and beginner-friendly for core data structures
+- it forces learners to see types and structure clearly
+- it maps well to backend and systems thinking
 
-**Step 3 – Core Programming Refresher (in Java)**  
-- Treat this repo as your “CS refresher repo” instead of random practice.  
-- Organize Java files like:
+Python may be used later for AI-first topics when the ecosystem makes it the better teaching tool.
 
-```text
-01-data-structures/
-  ├─ LinkedListDemo.java
-  ├─ BinaryTreeDemo.java
-  └─ GraphDfsBfsDemo.java
-02-algorithms/
-  ├─ MergeSort.java
-  ├─ BinarySearch.java
-  └─ DynamicProgrammingExamples.java
-03-systems/
-  ├─ SimpleCache.java
-  └─ RateLimiter.java
+## How To Run The Code
+
+Each numbered folder contains small Java files with a `main` method.
+
+Example:
+
+```bash
+cd 01-data-structures
+javac *.java
+java ArrayExamples
 ```
 
-- You do **not** need C++ unless you deliberately want it; Java is the primary language here.
+You can do the same in `02-algorithms/` and `03-systems/`.
 
-**Step 4 – AI Foundations (most important for this course)**  
-- Go to `04-ai-foundations/`.  
-- Focus on the concepts you’ll explain to non‑experts:
-  - Gradient descent and backpropagation (intuitive explanation first, math second)
-  - Embeddings and vector search
-  - Transformers (high‑level view of attention and tokens)
-  - RAG pipelines (how LLMs + retrieval work together)
-- Recommended book: *Hands‑On Machine Learning with Scikit‑Learn, Keras, and TensorFlow* (Géron).  
-- Use this repo to hold:
-  - Java‑style pseudocode for the ideas  
-  - Simple Java services that **use** AI systems (e.g., call an API, wrap a vector DB)  
-  - Links out to Python notebooks when the ecosystem is Python‑first.
+## What Good Learning Looks Like Here
 
-## Canonical repo rules (source of truth)
+A learner should be able to answer these questions after each folder:
 
-This repo should stay:
+- What problem does this structure or algorithm solve?
+- What is the time complexity?
+- What are the tradeoffs?
+- Where does this show up in a real AI system?
+- What are the common beginner mistakes?
 
-- **Stable**: avoid class-specific or cohort-specific changes here.
-- **Reusable**: content should make sense to someone learning alone.
-- **Consistent**: numbered folders, predictable naming, and clear instructions.
+If the code runs but the learner cannot answer those questions, the material is not clear enough yet.
 
-## Teaching/adapted repo guidance (downstream)
+## Design Principles For This Repo
 
-If you create a teaching version (example: for a cohort), put teaching-only material there, like:
+- Keep examples small and runnable.
+- Prefer clarity over abstraction.
+- Do not hide the core logic behind helper frameworks.
+- Use comments to explain why the code works, not to repeat obvious syntax.
+- Keep documentation honest about what the code does and does not do.
+- Connect each topic back to AI engineering where appropriate.
 
-```text
-cohort-exercises/
-instructor-notes/
-student-prompts/
-```
+## Current Scope
 
-Keep this repo as the **reference** and adapt the teaching repo as needed (pace, deadlines, rubrics, cohort tooling).
+Today, the strongest material is in:
 
+- `01-data-structures/`
+- `02-algorithms/`
+- `03-systems/`
+
+The `04-ai-foundations/` and `05-mini-projects/` folders are important to the curriculum, but they still need more detailed teaching material and concrete examples to match the quality of the earlier folders.
+
+## Contribution Expectations
+
+If you update this repo:
+
+- keep the numbered curriculum structure intact
+- prefer teaching-quality examples over shortcuts
+- add enough explanation for a beginner to follow the code
+- avoid overstating what an example implements
+- keep the repo stable and reusable for self-study
+
+## Next Step
+
+If you are new to this repo, start with `01-data-structures/README.md`.

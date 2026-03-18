@@ -1,5 +1,5 @@
 /**
- * Merge sort — divide and conquer, O(n log n), stable.
+ * Merge sort - divide and conquer, O(n log n), stable.
  *
  * Recursion: split in half, sort each half, merge. Good for understanding
  * recurrence relations and why we get n log n.

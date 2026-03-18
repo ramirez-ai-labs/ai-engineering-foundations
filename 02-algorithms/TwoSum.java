@@ -2,14 +2,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Two Sum — find two indices such that arr[i] + arr[j] = target.
+ * Two Sum - find two indices such that arr[i] + arr[j] = target.
  *
- * Brute force: O(n²). With hash map (store complement): O(n).
+ * Brute force: O(n^2). With hash map (store complement): O(n).
  * Classic interview problem and pattern: "use a map to remember what you've seen."
  */
 public class TwoSum {
 
-    /** O(n²) — two nested loops */
+    /** O(n^2) - two nested loops */
     static int[] twoSumBrute(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
@@ -19,7 +19,7 @@ public class TwoSum {
         return new int[] { -1, -1 };
     }
 
-    /** O(n) — one pass with hash map: value -> index; look for (target - value) */
+    /** O(n) - one pass with hash map: value -> index; look for (target - value) */
     static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> seen = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
