@@ -2,6 +2,12 @@
 
 This folder is a practical algorithm refresher. It is intentionally small. The point is to understand the patterns you actually reuse, not to turn this repo into a giant interview problem bank.
 
+This chapter is the next step in the repo's progression:
+
+- take the data structures from `01`
+- learn how to operate on them efficiently
+- build the runtime intuition needed for retrieval, ranking, indexing, and scale-aware AI engineering decisions
+
 Focus areas:
 
 - searching
@@ -9,6 +15,21 @@ Focus areas:
 - hash-map-based lookup patterns
 - time complexity analysis
 - recursion and divide-and-conquer thinking
+
+## Progression To AI Engineering
+
+This folder answers the next set of questions:
+
+1. how do we search or transform data efficiently?
+2. what does the runtime cost of that choice look like?
+3. when is extra memory worth using to gain speed?
+
+Those questions show up constantly in AI systems:
+
+- search algorithms become retrieval and lookup behavior
+- sorting and ranking appear in top-k selection and result ordering
+- hash-map optimization patterns appear in indexing and caching paths
+- Big-O reasoning determines whether a pipeline can scale beyond toy inputs
 
 ## Files In This Folder
 

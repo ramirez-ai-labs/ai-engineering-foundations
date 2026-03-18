@@ -2,12 +2,32 @@
 
 This folder introduces the core data structures that show up repeatedly in software engineering and AI systems.
 
+This chapter sits at the base of the repo's progression:
+
+- refresh how data is stored and accessed
+- build intuition for runtime and representation tradeoffs
+- prepare learners to understand how AI systems hold tokens, vectors, metadata, and graph-shaped relationships
+
 The goal is not to memorize definitions. The goal is to understand:
 
 - how each structure stores data
 - what operations are fast or slow
 - what tradeoffs you make when choosing one structure over another
 - where the structure appears in real AI engineering work
+
+## Progression To AI Engineering
+
+This folder answers two foundational questions:
+
+1. how is information represented in memory?
+2. what storage shape best fits the operation you need?
+
+Those questions directly enable later AI work:
+
+- arrays lead into embeddings, tensors, token buffers, and batches
+- hash maps lead into vocabularies, indexes, caches, and metadata joins
+- trees lead into recursive reasoning, parsing, and search structures
+- graphs lead into workflows, dependency tracking, retrieval flows, and knowledge graphs
 
 ## Why Data Structures Matter Later In AI Engineering
 

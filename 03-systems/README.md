@@ -2,12 +2,34 @@
 
 This folder connects classical CS ideas to the kinds of systems AI engineers actually build and operate.
 
+This chapter moves the repo from algorithmic reasoning into service behavior:
+
+- how requests are handled
+- how expensive work is controlled
+- how latency and throughput are managed
+- how backend components are exposed safely and predictably
+
 The examples here are intentionally small. They are not production-ready infrastructure. They are teaching examples that expose the main concepts directly:
 
 - caching
 - rate limiting
 - queues
 - API design
+
+## Progression To AI Engineering
+
+This folder answers the operational questions that come after data structures and algorithms:
+
+1. how do we serve capabilities through stable interfaces?
+2. how do we control load, latency, and repeated work?
+3. how do we decouple expensive tasks from user-facing request paths?
+
+Those questions directly enable AI platforms:
+
+- caches reduce repeated inference and embedding cost
+- rate limiters protect expensive model endpoints
+- queues support ingestion, indexing, batch jobs, and evaluations
+- API design shapes how applications consume AI services reliably
 
 ## Files In This Folder
 

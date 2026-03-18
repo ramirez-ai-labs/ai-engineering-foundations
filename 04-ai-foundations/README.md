@@ -2,7 +2,25 @@
 
 This folder is the bridge between classic CS refresh material and modern AI engineering.
 
+This chapter makes the progression explicit:
+
+- data structures explain how vectors, tokens, and metadata are represented
+- algorithms explain retrieval, ranking, and search behavior
+- systems thinking explains latency, cost, and reliability constraints
+- AI foundations explain what the models and retrieval layers are actually doing
+
 The goal is not to turn learners into research scientists. The goal is to give them enough conceptual grounding to understand what AI systems are doing, how to talk about them correctly, and how to make sound implementation choices.
+
+## Progression To AI Engineering
+
+This folder answers the question, "Now that I understand core CS mechanics, how do those mechanics show up inside real AI workflows?"
+
+Examples:
+
+- arrays and vector math lead into embeddings
+- similarity scoring leads into retrieval
+- systems tradeoffs lead into RAG design decisions
+- measurement and feedback lead into evaluation and observability
 
 ## Core Topics This Folder Should Cover
 
@@ -43,12 +61,17 @@ Compared with the earlier folders, this section still needs:
 - runnable demos or notebooks
 - references to evaluation and observability workflows
 
+## Current Material
+
+| File | What It Teaches | Why It Matters |
+|------|------------------|----------------|
+| `EmbeddingsAndVectorSearch.md` | embeddings, cosine similarity, retrieval flow, RAG connection, failure modes | gives learners the conceptual base they need before using vector databases or building retrieval pipelines |
+
 ## Suggested File Additions
 
 Examples of good additions for this folder:
 
 - `GradientDescentBasics.md`
-- `EmbeddingsAndVectorSearch.md`
 - `RAGConcepts.md`
 - `TransformerIntuition.md`
 - `evaluation-checklist.md`

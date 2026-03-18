@@ -6,7 +6,28 @@ This repository is a structured refresher for:
 - new engineers trying to get started in AI engineering
 - experienced engineers who want a compact, practical review of core topics
 
-The repo is organized like a short textbook. Each numbered folder is a chapter. The emphasis is on small examples, clear explanations, and direct links between CS fundamentals and modern AI work.
+The repo is organized like a short textbook. Each numbered folder is a chapter in a progression:
+
+1. refresh the core CS foundations
+2. show how those foundations reappear in modern AI systems
+3. help learners see why AI tools and architectures work the way they do
+
+The emphasis is on small examples, clear explanations, and explicit mapping from foundational CS ideas to the AI systems, platforms, and tools learners will be using and building.
+
+## Core Goal
+
+The ultimate goal of this repo is twofold:
+
+- help CS majors refresh the foundations they need to reason well about software systems
+- show the progression from those foundations into real AI engineering workflows
+
+This means the repo should not teach data structures, algorithms, systems, and AI topics as disconnected chapters. It should teach them as a sequence where each layer enables the next:
+
+- arrays and hash maps enable embeddings, metadata lookup, and caching
+- algorithms enable ranking, search, retrieval, and scaling decisions
+- systems concepts enable reliable APIs, pipelines, queues, and model-serving infrastructure
+- AI foundations explain the behavior and tradeoffs of embeddings, retrieval, generation, and evaluation
+- mini-projects combine those layers into small, credible AI-engineering exercises
 
 ## Who This Repo Is For
 
@@ -28,6 +49,13 @@ Work through the folders in order:
 3. `03-systems/`
 4. `04-ai-foundations/`
 5. `05-mini-projects/`
+
+The intended progression is:
+
+1. learn the core CS concept
+2. understand its runtime and design tradeoffs
+3. see how it appears inside AI systems
+4. apply it in a small integrated example
 
 Recommended approach:
 
@@ -86,6 +114,14 @@ java ArrayExamples
 
 You can do the same in `02-algorithms/` and `03-systems/`.
 
+There is also a first runnable mini-project in `05-mini-projects/`:
+
+```bash
+cd 05-mini-projects
+javac SimpleVectorSearchDemo.java
+java SimpleVectorSearchDemo
+```
+
 ## What Good Learning Looks Like Here
 
 A learner should be able to answer these questions after each folder:
@@ -114,8 +150,10 @@ Today, the strongest material is in:
 - `01-data-structures/`
 - `02-algorithms/`
 - `03-systems/`
+- `04-ai-foundations/EmbeddingsAndVectorSearch.md`
+- `05-mini-projects/SimpleVectorSearchDemo.java`
 
-The `04-ai-foundations/` and `05-mini-projects/` folders are important to the curriculum, but they still need more detailed teaching material and concrete examples to match the quality of the earlier folders.
+The `04-ai-foundations/` and `05-mini-projects/` folders are now seeded with an initial embeddings/vector-search note and a first runnable retrieval demo, but they still need additional material to match the breadth of the earlier folders.
 
 ## Contribution Expectations
 
