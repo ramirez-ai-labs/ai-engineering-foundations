@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class TreeBasics {
 
+    // A tree node can point to a left child and a right child.
     static class TreeNode {
         int value;
         TreeNode left, right;
@@ -21,7 +22,12 @@ public class TreeBasics {
 
     /** In-order: left -> node -> right. For BST this gives sorted order. */
     static void inorder(TreeNode node, List<Integer> out) {
-        if (node == null) return;
+        // Base case: an empty subtree contributes nothing.
+        if (node == null) {
+            return;
+        }
+
+        // Recursively visit the left subtree, then this node, then the right subtree.
         inorder(node.left, out);
         out.add(node.value);
         inorder(node.right, out);
@@ -29,7 +35,12 @@ public class TreeBasics {
 
     /** Pre-order: node -> left -> right. Useful for copying or prefix expressions. */
     static void preorder(TreeNode node, List<Integer> out) {
-        if (node == null) return;
+        // Base case: an empty subtree contributes nothing.
+        if (node == null) {
+            return;
+        }
+
+        // In pre-order we record the current node before exploring children.
         out.add(node.value);
         preorder(node.left, out);
         preorder(node.right, out);
@@ -37,9 +48,21 @@ public class TreeBasics {
 
     /** Search in a BST - O(height), O(log n) if balanced */
     static boolean searchBST(TreeNode node, int target) {
-        if (node == null) return false;
-        if (node.value == target) return true;
-        if (target < node.value) return searchBST(node.left, target);
+        // Base case: target is not in an empty subtree.
+        if (node == null) {
+            return false;
+        }
+        // If the current node matches, the search is done.
+        if (node.value == target) {
+            return true;
+        }
+
+        // BST rule:
+        // smaller values live on the left, larger values live on the right.
+        // That rule lets us skip half of the remaining tree each step.
+        if (target < node.value) {
+            return searchBST(node.left, target);
+        }
         return searchBST(node.right, target);
     }
 
@@ -49,14 +72,14 @@ public class TreeBasics {
         //          2     6
         //         / \   /
         //        1  3  5
-        TreeNode root = new TreeNode(4);
+        TreeNode root = new TreeNode(4); // root node
         root.left = new TreeNode(2);
         root.right = new TreeNode(6);
         root.left.left = new TreeNode(1);
         root.left.right = new TreeNode(3);
         root.right.left = new TreeNode(5);
 
-        List<Integer> in = new ArrayList<>();
+        List<Integer> in = new ArrayList<>(); // collect traversal output here
         inorder(root, in);
         System.out.println("In-order (sorted): " + in);
 

@@ -9,6 +9,19 @@ The goal is not to memorize definitions. The goal is to understand:
 - what tradeoffs you make when choosing one structure over another
 - where the structure appears in real AI engineering work
 
+## Why Data Structures Matter Later In AI Engineering
+
+Most AI systems are pipelines that move and transform data. Before a learner works on vector databases, RAG pipelines, model serving, or agent orchestration, they need to understand the shapes and containers that make those systems possible.
+
+Examples:
+
+- arrays become token sequences, embedding vectors, and mini-batches
+- hash maps become vocabularies, cache indexes, feature maps, and metadata stores
+- trees help with recursive reasoning, parsing, and hierarchical state
+- graphs show up in workflows, dependency tracking, knowledge graphs, and traversal-heavy retrieval tasks
+
+If a learner is weak on these basics, later AI topics often feel magical. If the learner is solid here, later systems feel like combinations of familiar parts.
+
 ## Files In This Folder
 
 | File | What It Teaches | Why It Matters |
@@ -96,6 +109,22 @@ java GraphDFSAndBFS
 - linked lists: useful mostly for conceptual grounding and interview-style reasoning
 - trees: recursive thinking, parse structures, search logic
 - graphs: retrieval flows, dependency graphs, knowledge graphs, workflow orchestration
+
+## How These Structures Become Building Blocks
+
+This folder is the first layer of several later AI engineering concepts:
+
+- embeddings and vector search depend on strong intuition for arrays and matrix-like structures
+- tokenization pipelines rely on mapping between strings, token IDs, and metadata, which is map-heavy work
+- document and chunk indexes depend on key-based lookup and graph-like relationships between artifacts
+- agent systems often maintain graph-shaped tool flows or tree-shaped decision paths
+- retrieval systems often combine arrays for numeric data and maps for metadata joins
+
+A useful mental model is:
+
+- data structures answer "how is the information stored?"
+- algorithms answer "how do we operate on it?"
+- systems answer "how do we serve it reliably at scale?"
 
 ## Practice Prompts
 
