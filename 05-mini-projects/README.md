@@ -26,6 +26,13 @@ Mini-projects should make the dependency chain visible:
 
 If a learner finishes a mini-project without seeing that chain, the project is missing part of its teaching value.
 
+## Current Projects
+
+| File | CS Concepts | AI Engineering Connection |
+|------|-------------|--------------------------|
+| `SimpleVectorSearchDemo.java` | arrays, cosine similarity, sorting, benchmarking | exact vs. approximate nearest-neighbor search; scale breaking point for linear scan |
+| `KnowledgeGraphBFS.java` | graph, BFS, adjacency representation | graph-based retrieval; expanding context beyond direct semantic matches |
+
 ## Project Ideas
 
 ### 1. Search Service With Caching
@@ -75,7 +82,7 @@ What a learner should build:
 
 Current file:
 
-- `SimpleVectorSearchDemo.java`: exact-scan cosine-similarity demo with hand-written embeddings
+- `SimpleVectorSearchDemo.java`: exact-scan cosine-similarity demo with hand-written embeddings, plus a timing benchmark at 100/1k/10k vectors that shows where linear scan breaks and why ANN indexes exist
 
 ## Project Quality Bar
 

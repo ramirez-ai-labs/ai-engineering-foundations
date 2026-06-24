@@ -36,6 +36,7 @@ Those questions directly enable AI platforms:
 | File | What It Teaches | Important Limitation |
 |------|------------------|----------------------|
 | `InMemoryCache.java` | local cache, TTL, lazy expiration | single-process demo, not distributed and not thread-safe |
+| `LRUCache.java` | LRU eviction, access-order tracking; connection to KV caching in LLM inference | single-process, not thread-safe, no TTL |
 | `RateLimiter.java` | fixed-window rate limiting | simplified implementation, not token bucket or sliding window |
 | `SimpleQueueDemo.java` | FIFO processing and queue behavior | not a real broker or concurrent queue system |
 | `RestApiDesignNotes.md` | API resource design, status codes, error shape, AI API concerns | note file only, not executable code |
