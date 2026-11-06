@@ -42,7 +42,7 @@ If you want production-scale projects, use this repo as the foundation first. Th
 
 ## Learning Path
 
-Work through the folders in order:
+Pick a language track, `Java/` or `Python/`, then work through its folders in order:
 
 1. `01-data-structures/`
 2. `02-algorithms/`
@@ -60,7 +60,7 @@ The intended progression is:
 Recommended approach:
 
 1. Read the folder README first.
-2. Compile and run each Java example.
+2. Run each example.
 3. Read the code line by line and trace the output.
 4. Re-implement the example without looking.
 5. Explain how the concept shows up in AI engineering.
@@ -70,11 +70,19 @@ Recommended approach:
 ```text
 /
 ├── README.md
-├── 01-data-structures/
-├── 02-algorithms/
-├── 03-systems/
-├── 04-ai-foundations/
-├── 05-mini-projects/
+├── Java/
+│   ├── 01-data-structures/
+│   ├── 02-algorithms/
+│   ├── 03-systems/
+│   ├── 04-ai-foundations/
+│   └── 05-mini-projects/
+├── Python/
+│   ├── README.md
+│   ├── 01-data-structures/
+│   ├── 02-algorithms/
+│   ├── 03-systems/
+│   ├── 04-ai-foundations/
+│   └── 05-mini-projects/
 ├── resources/
 ├── blog-assets/
 ├── talks/
@@ -92,34 +100,57 @@ Folder purpose:
 
 ## Language Choice
 
-Java is the default language for the CS examples in this repository because:
+The chapters are available in two languages, so choose the one you want to learn or refresh.
+
+Java is the default language for new CS examples in this repository because:
 
 - it is explicit and beginner-friendly for core data structures
 - it forces learners to see types and structure clearly
 - it maps well to backend and systems thinking
 
-Python may be used later for AI-first topics when the ecosystem makes it the better teaching tool.
+Python is the better fit for learners heading straight into the AI ecosystem. The Python track deliberately avoids language shortcuts such as comprehensions and `enumerate`, so the underlying logic stays visible. A `Python shortcut:` comment names the built-in version where it helps. See [Python/README.md](Python/README.md).
+
+The written notes in `Java/04-ai-foundations/` and `Java/03-systems/RestApiDesignNotes.md` are mostly language-neutral, so the Python track links to them instead of duplicating them.
 
 ## How To Run The Code
+
+### Java
 
 Each numbered folder contains small Java files with a `main` method.
 
 Example:
 
 ```bash
-cd 01-data-structures
+cd Java/01-data-structures
 javac *.java
 java ArrayExamples
 ```
 
-You can do the same in `02-algorithms/` and `03-systems/`.
+You can do the same in `Java/02-algorithms/` and `Java/03-systems/`.
 
-There is also a first runnable mini-project in `05-mini-projects/`:
+There is also a first runnable mini-project in `Java/05-mini-projects/`:
 
 ```bash
-cd 05-mini-projects
+cd Java/05-mini-projects
 javac SimpleVectorSearchDemo.java
 java SimpleVectorSearchDemo
+```
+
+### Python
+
+Python 3.10 or newer is required, with no packages to install.
+
+```bash
+cd Python/01-data-structures
+python array_examples.py
+```
+
+The mini-project also has tests:
+
+```bash
+cd Python/05-mini-projects
+python simple_vector_search_demo.py
+python -m unittest -v
 ```
 
 ## What Good Learning Looks Like Here
@@ -145,15 +176,16 @@ If the code runs but the learner cannot answer those questions, the material is 
 
 ## Current Scope
 
-Today, the strongest material is in:
+In both tracks, the strongest material is in:
 
 - `01-data-structures/`
 - `02-algorithms/`
 - `03-systems/`
-- `04-ai-foundations/EmbeddingsAndVectorSearch.md`
-- `05-mini-projects/SimpleVectorSearchDemo.java`
+- the vector search demo in `05-mini-projects/`
 
-The `04-ai-foundations/` and `05-mini-projects/` folders are now seeded with an initial embeddings/vector-search note and a first runnable retrieval demo, but they still need additional material to match the breadth of the earlier folders.
+`Java/04-ai-foundations/` holds the chapter's notes on embeddings, transformers, RAG architecture, and evaluation metrics.
+
+The Java track also has three things the Python track does not have yet: `LRUCache.java`, `KnowledgeGraphBFS.java`, and a linear-scan benchmark in its vector search demo.
 
 ## Contribution Expectations
 
@@ -167,4 +199,4 @@ If you update this repo:
 
 ## Next Step
 
-If you are new to this repo, start with `01-data-structures/README.md`.
+If you are new to this repo, start with [Java/01-data-structures/README.md](Java/01-data-structures/README.md) or [Python/01-data-structures/README.md](Python/01-data-structures/README.md).
