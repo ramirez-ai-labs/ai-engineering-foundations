@@ -181,7 +181,7 @@ If a learner understands these mechanics, vector retrieval stops feeling magical
 
 After reading this note:
 
-1. Run [SimpleVectorSearchDemo.java](/c:/code/ramirez-ai-labs/ai-engineer-cs-refresh/05-mini-projects/SimpleVectorSearchDemo.java).
+1. Run [SimpleVectorSearchDemo.java](../05-mini-projects/SimpleVectorSearchDemo.java).
 2. Change one document vector and observe how ranking changes.
 3. Add metadata filters such as `domain=security` or `language=en`.
 4. Compare cosine similarity with plain dot product.

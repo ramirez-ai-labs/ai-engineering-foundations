@@ -18,18 +18,17 @@ The repository is organized as a textbook-style curriculum:
 ```text
 /
 ├── README.md
-├── 01-data-structures/
-├── 02-algorithms/
-├── 03-systems/
-├── 04-ai-foundations/
-├── 05-mini-projects/
+├── Java/
+│   └── 01-data-structures/ ... 05-mini-projects/
+├── Python/
+│   └── 01-data-structures/ ... 05-mini-projects/
 ├── resources/
 ├── blog-assets/
 ├── talks/
 └── workshop-notes/
 ```
 
-Interpretation:
+Interpretation (the numbered chapters are the same in both language tracks):
 
 - `01-data-structures/` and `02-algorithms/`: concise CS refresh material.
 - `03-systems/`: production systems concepts tied to AI platforms and backend architecture.
@@ -80,6 +79,7 @@ When contributing to this repo:
 - Default language for CS examples is **Java** unless a different language is clearly more appropriate.
 - Use **Python** when the topic is naturally ML/AI-first, notebook-oriented, or ecosystem-constrained.
 - Use **TypeScript** for frontend or typed scripting work when needed.
+- The `Python/` track teaches the same chapters for beginners and people refreshing. Write explicit logic there instead of Python shortcuts such as comprehensions, `enumerate`, or `sum`, and use a `Python shortcut:` comment to name the built-in version where it helps.
 - If introducing a new language, explain why it is the right choice for that folder or example.
 
 ### Educational Bias
@@ -95,7 +95,7 @@ When contributing to this repo:
 
 - Keep code clean, minimal, and production-aware.
 - Follow idiomatic style for the language being used.
-- Include type hints in Python.
+- Include type hints in Python on function signatures, empty containers, and attributes that start as `None`. Leave them off where the assigned value makes the type obvious.
 - Keep Java examples straightforward and easy to compile/run locally.
 - Avoid unnecessary dependencies.
 
