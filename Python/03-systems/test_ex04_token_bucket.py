@@ -37,10 +37,25 @@ class ValidationTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 TokenBucket(capacity, rate)
 
+    def test_rejects_nan_and_infinite_settings(self) -> None:
+        # NaN slips past "<= 0" because it fails every comparison; infinite
+        # capacity would allow every request. Both must be rejected up front.
+        nan = float("nan")
+        inf = float("inf")
+        for capacity, rate in [(nan, 1.0), (inf, 1.0), (1, nan), (1, inf)]:
+            with self.assertRaises(ValueError):
+                TokenBucket(capacity, rate)
+
     def test_rejects_non_positive_cost(self) -> None:
         bucket = TokenBucket(capacity=5, refill_per_second=1)
         with self.assertRaises(ValueError):
             bucket.allow(cost=0)
+
+    def test_rejects_nan_cost(self) -> None:
+        # Without the check, allow(nan) silently returns False forever.
+        bucket = TokenBucket(capacity=5, refill_per_second=1)
+        with self.assertRaises(ValueError):
+            bucket.allow(cost=float("nan"))
 
     def test_rejects_cost_larger_than_capacity(self) -> None:
         # Such a request could never succeed, so it is an error, not a "no".

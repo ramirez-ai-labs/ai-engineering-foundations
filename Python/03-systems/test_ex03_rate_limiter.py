@@ -37,6 +37,13 @@ class ValidationTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 RateLimiter(max_requests, window)
 
+    def test_rejects_nan_and_infinite_window(self) -> None:
+        # A NaN window slips past "<= 0" and never resets, so the limiter would
+        # block every request after the first N, forever.
+        for window in [float("nan"), float("inf")]:
+            with self.assertRaises(ValueError):
+                RateLimiter(2, window)
+
 
 class FixedWindowTest(unittest.TestCase):
     def setUp(self) -> None:

@@ -22,8 +22,9 @@ policy to keep hot entries in memory.
 
 Python shortcuts: collections.OrderedDict with move_to_end() and
 popitem(last=False) gives you this in a few lines, and functools.lru_cache
-memoizes a function. The Java track's Ex05LRUCache.java uses LinkedHashMap, which
-is the Java equivalent of OrderedDict.
+memoizes a function. The Java track's Ex05LRUCache.java builds the same
+structure by hand; its Javadoc shows the LinkedHashMap shortcut, which is the
+Java equivalent of OrderedDict.
 
 Limitations: not thread-safe, string keys and values only, no TTL. Combining
 this with ex02_in_memory_cache.py's lazy expiry is a good next exercise.
