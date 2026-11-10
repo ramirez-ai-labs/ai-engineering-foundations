@@ -22,7 +22,10 @@ python time_complexity_notes.py
 python binary_search.py
 python two_sum.py
 python merge_sort.py
+python -m unittest -v
 ```
+
+The Two Sum tests run every case against both versions, and the merge sort tests compare against `sorted()` on random input with a fixed seed.
 
 ## What To Pay Attention To
 

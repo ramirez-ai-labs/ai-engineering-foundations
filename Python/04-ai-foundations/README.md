@@ -23,7 +23,8 @@ The notes name Java files. These are the Python equivalents:
 | `InMemoryCache.java` | [in_memory_cache.py](../03-systems/in_memory_cache.py) |
 | `RateLimiter.java` | [rate_limiter.py](../03-systems/rate_limiter.py) |
 | `SimpleQueueDemo.java` | [simple_queue_demo.py](../03-systems/simple_queue_demo.py) |
-| `LRUCache.java` | no Python version yet |
+| `LRUCache.java` | [lru_cache.py](../03-systems/lru_cache.py), built from a dict and a doubly linked list instead of `LinkedHashMap` |
+| `KnowledgeGraphBFS.java` | [knowledge_graph_bfs.py](../05-mini-projects/knowledge_graph_bfs.py) |
 
 The [Java chapter README](../../Java/04-ai-foundations/README.md) describes the chapter's goals and the topics it covers.
 

@@ -41,5 +41,28 @@ Work through these in order. Each folder's README explains how to run its code.
 
 1. Run the file and read its output.
 2. Read the code line by line and predict the output.
-3. Re-implement it without looking.
-4. Rewrite it using the shortcuts named in the comments, and confirm the output stays the same.
+3. Re-implement it without looking, then check your version with the tests (see below).
+4. Rewrite it using the shortcuts named in the comments, and confirm the tests still pass.
+
+## Tests
+
+Every file that defines functions or classes has a matching `test_<name>.py` beside it. The three pure demos (`array_examples.py`, `hash_map_examples.py`, `simple_queue_demo.py`) only print, so they have none. Run a chapter's tests from its folder:
+
+```bash
+cd Python/01-data-structures
+python -m unittest -v
+```
+
+The tests use only the standard library. Time-based tests swap `time.monotonic` for a fake clock, so the whole suite runs in well under a second with no `sleep`.
+
+### Re-implementing From Scratch
+
+The tests make step 3 checkable:
+
+1. Pick a function, for example `reverse` in `linked_list_demo.py`.
+2. Delete its body and leave the signature and docstring.
+3. Write it again from memory.
+4. Run that file's tests: `python -m unittest test_linked_list_demo -v`.
+5. Restore the original with `git checkout -- <file>` when you are done.
+
+You know a topic when your version passes on the first run and you can state its Big-O and where it appears in an AI system without notes.
