@@ -46,22 +46,22 @@ If a learner is weak on these basics, later AI topics often feel magical. If the
 
 | File | What It Teaches | Why It Matters |
 |------|------------------|----------------|
-| `ArrayExamples.java` | indexing, iteration, copying, and 2D arrays | arrays are the basis of vectors, tensors, batches, and token sequences |
-| `HashMapExamples.java` | key-value storage, lookup, iteration, frequency counting | hash maps are used in vocabularies, feature maps, caches, and counters |
-| `LinkedListDemo.java` | nodes, references, traversal, head insertion, removal, reversal, slow/fast pointers | linked lists teach pointer-style thinking and tradeoffs vs arrays |
-| `TreeBasics.java` | binary tree structure, in-/pre-/post-order and level-order traversal, height, BST insert and lookup | trees build recursive reasoning used in many CS topics |
-| `GraphDFSAndBFS.java` | adjacency lists, iterative and recursive DFS, BFS, BFS shortest path, visited tracking | graphs model relationships, pipelines, dependencies, and search spaces |
+| `Ex01ArrayExamples.java` | indexing, iteration, copying, and 2D arrays | arrays are the basis of vectors, tensors, batches, and token sequences |
+| `Ex02HashMapExamples.java` | key-value storage, lookup, iteration, frequency counting | hash maps are used in vocabularies, feature maps, caches, and counters |
+| `Ex03LinkedListDemo.java` | nodes, references, traversal, head insertion, removal, reversal, slow/fast pointers | linked lists teach pointer-style thinking and tradeoffs vs arrays |
+| `Ex04TreeBasics.java` | binary tree structure, in-/pre-/post-order and level-order traversal, height, BST insert and lookup | trees build recursive reasoning used in many CS topics |
+| `Ex05GraphDFSAndBFS.java` | adjacency lists, iterative and recursive DFS, BFS, BFS shortest path, visited tracking | graphs model relationships, pipelines, dependencies, and search spaces |
 | `*Test.java`, `AllTests.java`, `Check.java` | tests for the linked list, tree, and graph files | lets you check a from-scratch rewrite (see [Testing](#testing)) |
 
 ## Suggested Order
 
 Work through the files in this order:
 
-1. `ArrayExamples.java`
-2. `HashMapExamples.java`
-3. `LinkedListDemo.java`
-4. `TreeBasics.java`
-5. `GraphDFSAndBFS.java`
+1. `Ex01ArrayExamples.java`
+2. `Ex02HashMapExamples.java`
+3. `Ex03LinkedListDemo.java`
+4. `Ex04TreeBasics.java`
+5. `Ex05GraphDFSAndBFS.java`
 
 This order starts with the most concrete structure and gradually moves toward more recursive and graph-based thinking.
 
@@ -71,26 +71,26 @@ From this folder:
 
 ```bash
 javac *.java
-java ArrayExamples
-java HashMapExamples
-java LinkedListDemo
-java TreeBasics
-java GraphDFSAndBFS
+java Ex01ArrayExamples
+java Ex02HashMapExamples
+java Ex03LinkedListDemo
+java Ex04TreeBasics
+java Ex05GraphDFSAndBFS
 java AllTests
 ```
 
 ## Testing
 
-`java AllTests` runs every test in this folder. Each `*Test.java` file also runs on its own, for example `java LinkedListDemoTest`. A failure prints `FAIL <name>: expected <...> but was <...>`, and the run exits with status 1.
+`java AllTests` runs every test in this folder. Each `*Test.java` file also runs on its own, for example `java Ex03LinkedListDemoTest`. A failure prints `FAIL <name>: expected <...> but was <...>`, and the run exits with status 1.
 
 The tests need no JUnit download. `Check.java` is a small assertion helper, and an identical copy sits in each chapter folder so every folder still compiles with `javac *.java`. A real project would use JUnit.
 
 To re-implement a method from scratch:
 
-1. Delete the body of a method, for example `reverse` in `LinkedListDemo.java`, and leave the signature and Javadoc.
+1. Delete the body of a method, for example `reverse` in `Ex03LinkedListDemo.java`, and leave the signature and Javadoc.
 2. Write it again from memory.
-3. Run `javac *.java && java LinkedListDemoTest`.
-4. Restore the original with `git checkout -- LinkedListDemo.java` when you are done.
+3. Run `javac *.java && java Ex03LinkedListDemoTest`.
+4. Restore the original with `git checkout -- Ex03LinkedListDemo.java` when you are done.
 
 You know a topic when your version passes on the first run and you can state its Big-O and where it appears in an AI system without notes.
 
@@ -175,11 +175,11 @@ A useful mental model is:
 
 After reading each file, try one or two small extensions:
 
-- `ArrayExamples.java`: compute the sum and average of the array
-- `HashMapExamples.java`: print the most frequent token
-- `LinkedListDemo.java`: add an `insertAtTail` method, then detect a cycle with slow and fast pointers
-- `TreeBasics.java`: return level-order as a list of levels (`[[4], [2, 6], [1, 3, 5]]`), then write `isValidBST`
-- `GraphDFSAndBFS.java`: change `dfs` so it prints the same order as `dfsRecursive`
+- `Ex01ArrayExamples.java`: compute the sum and average of the array
+- `Ex02HashMapExamples.java`: print the most frequent token
+- `Ex03LinkedListDemo.java`: add an `insertAtTail` method, then detect a cycle with slow and fast pointers
+- `Ex04TreeBasics.java`: return level-order as a list of levels (`[[4], [2, 6], [1, 3, 5]]`), then write `isValidBST`
+- `Ex05GraphDFSAndBFS.java`: change `dfs` so it prints the same order as `dfsRecursive`
 
 ## Exit Criteria
 

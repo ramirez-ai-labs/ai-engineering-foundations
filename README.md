@@ -50,6 +50,16 @@ Pick a language track, `Java/` or `Python/`, then work through its folders in or
 4. `04-ai-foundations/`
 5. `05-mini-projects/`
 
+Inside each folder, files are numbered from easiest to hardest, so a file listing shows the reading order:
+
+| Track | Example | Notes |
+|---|---|---|
+| Python | `ex01_array_examples.py`, `ex02_hash_map_examples.py`, ... | tests sit beside their module as `test_ex03_linked_list_demo.py` |
+| Java | `Ex01ArrayExamples.java`, `Ex02HashMapExamples.java`, ... | tests sit beside their class as `Ex03LinkedListDemoTest.java` |
+| Notes | `01-EmbeddingsAndVectorSearch.md`, ... | `Java/04-ai-foundations/`, shared by both tracks |
+
+The `ex`/`Ex` prefix exists because neither language allows a name to start with a digit: Python cannot import a module named `01_...`, and a Java class cannot be named `01...`. Numbering restarts in each chapter, and the same number means the same lesson in both tracks. Unnumbered files such as `Check.java`, `FakeClock.java`, and `AllTests.java` are test support.
+
 The intended progression is:
 
 1. learn the core CS concept
@@ -123,7 +133,7 @@ Example:
 ```bash
 cd Java/01-data-structures
 javac *.java
-java ArrayExamples
+java Ex01ArrayExamples
 ```
 
 You can do the same in `Java/02-algorithms/`, `Java/03-systems/`, and `Java/05-mini-projects/`.
@@ -144,14 +154,14 @@ Python 3.10 or newer is required, with no packages to install.
 
 ```bash
 cd Python/01-data-structures
-python array_examples.py
+python ex01_array_examples.py
 ```
 
 Every Python file with functions or classes has a `test_<name>.py` beside it. Run a chapter's tests from its folder:
 
 ```bash
 cd Python/05-mini-projects
-python simple_vector_search_demo.py
+python ex01_simple_vector_search_demo.py
 python -m unittest -v
 ```
 

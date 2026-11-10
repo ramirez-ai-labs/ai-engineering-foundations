@@ -1,8 +1,8 @@
 /** Runs every test in this folder. Run: javac *.java && java AllTests */
 public class AllTests {
     public static void main(String[] args) {
-        SimpleVectorSearchDemoTest.run();
-        KnowledgeGraphBFSTest.run();
+        Ex01SimpleVectorSearchDemoTest.run();
+        Ex02KnowledgeGraphBFSTest.run();
         Check.finish();
     }
 }
