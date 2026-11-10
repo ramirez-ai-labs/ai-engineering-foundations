@@ -65,9 +65,9 @@ Compared with the earlier folders, this section still needs:
 
 | File | What It Teaches | Why It Matters |
 |------|------------------|----------------|
-| `EmbeddingsAndVectorSearch.md` | embeddings, cosine similarity, retrieval flow, RAG connection, failure modes | gives learners the conceptual base they need before using vector databases or building retrieval pipelines |
-| `TransformerIntuition.md` | attention as weighted lookup, Q/K/V framing, context window constraints, KV caching connection | demystifies what the model is doing well enough to make sound decisions about chunking, prompts, and cost |
-| `RAGArchitecture.md` | full ingestion → retrieval → generation pipeline, failure modes at each stage, how chapter 03 systems concepts plug in | gives learners a complete system picture, not just the retrieval layer |
-| `EvaluationMetrics.md` | Recall@k, Precision@k, MRR, groundedness, how to build an offline eval loop | teaches learners to measure retrieval and generation quality instead of guessing |
+| `01-EmbeddingsAndVectorSearch.md` | embeddings, cosine similarity, retrieval flow, RAG connection, failure modes | gives learners the conceptual base they need before using vector databases or building retrieval pipelines |
+| `02-TransformerIntuition.md` | attention as weighted lookup, Q/K/V framing, context window constraints, KV caching connection | demystifies what the model is doing well enough to make sound decisions about chunking, prompts, and cost |
+| `03-RAGArchitecture.md` | full ingestion → retrieval → generation pipeline, failure modes at each stage, how chapter 03 systems concepts plug in | gives learners a complete system picture, not just the retrieval layer |
+| `04-EvaluationMetrics.md` | Recall@k, Precision@k, MRR, groundedness, how to build an offline eval loop | teaches learners to measure retrieval and generation quality instead of guessing |
 
 If code is added here, choose the language that best teaches the idea. Java is fine for simple conceptual demos. Python is often the better fit for matrix math, notebooks, or ML ecosystem examples.

@@ -4,7 +4,7 @@ Small end-to-end projects that combine the earlier chapters. For each one, you s
 
 ## Simple Vector Search Demo
 
-`simple_vector_search_demo.py` ranks four documents against a query vector using cosine similarity, which is the core of retrieval in a RAG system.
+`ex01_simple_vector_search_demo.py` ranks four documents against a query vector using cosine similarity, which is the core of retrieval in a RAG system.
 
 It combines:
 
@@ -18,7 +18,7 @@ It combines:
 From this folder:
 
 ```bash
-python simple_vector_search_demo.py
+python ex01_simple_vector_search_demo.py
 python -m unittest -v
 ```
 
@@ -36,16 +36,16 @@ python -m unittest -v
 - compare the ranking from plain dot product with cosine similarity
 - estimate how long an exact scan would take over 4,000,000 documents
 
-Read [Embeddings and Vector Search](../../Java/04-ai-foundations/EmbeddingsAndVectorSearch.md) for the concepts behind this demo.
+Read [Embeddings and Vector Search](../../Java/04-ai-foundations/01-EmbeddingsAndVectorSearch.md) for the concepts behind this demo.
 
 ## Knowledge Graph BFS
 
-`knowledge_graph_bfs.py` expands a query concept into every related concept within N hops of a small, directed AI-topic graph. Graph-based retrieval (such as GraphRAG) uses this step to pull in context that is logically connected but not necessarily close in embedding space.
+`ex02_knowledge_graph_bfs.py` expands a query concept into every related concept within N hops of a small, directed AI-topic graph. Graph-based retrieval (such as GraphRAG) uses this step to pull in context that is logically connected but not necessarily close in embedding space.
 
 It combines:
 
 - a dict of edge lists as the adjacency structure, with named nodes and labeled edges
-- the BFS from `01-data-structures/graph_dfs_and_bfs.py`, plus a hop limit
+- the BFS from `01-data-structures/ex05_graph_dfs_and_bfs.py`, plus a hop limit
 - a recorded path per node, so you can see why each concept was retrieved
 
 ### How To Run
@@ -53,8 +53,8 @@ It combines:
 From this folder:
 
 ```bash
-python knowledge_graph_bfs.py
-python -m unittest test_knowledge_graph_bfs -v
+python ex02_knowledge_graph_bfs.py
+python -m unittest test_ex02_knowledge_graph_bfs -v
 ```
 
 ### What This Demo Simplifies
@@ -71,4 +71,4 @@ python -m unittest test_knowledge_graph_bfs -v
 
 ## Java-Only Material
 
-[SimpleVectorSearchDemo.java](../../Java/05-mini-projects/SimpleVectorSearchDemo.java) adds a timing benchmark showing where linear scan breaks down. It has no Python version yet.
+[Ex01SimpleVectorSearchDemo.java](../../Java/05-mini-projects/Ex01SimpleVectorSearchDemo.java) adds a timing benchmark showing where linear scan breaks down. It has no Python version yet.

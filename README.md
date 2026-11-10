@@ -50,6 +50,16 @@ Pick a language track, `Java/` or `Python/`, then work through its folders in or
 4. `04-ai-foundations/`
 5. `05-mini-projects/`
 
+Inside each folder, files are numbered from easiest to hardest, so a file listing shows the reading order:
+
+| Track | Example | Notes |
+|---|---|---|
+| Python | `ex01_array_examples.py`, `ex02_hash_map_examples.py`, ... | tests sit beside their module as `test_ex03_linked_list_demo.py` |
+| Java | `Ex01ArrayExamples.java`, `Ex02HashMapExamples.java`, ... | tests sit beside their class as `Ex03LinkedListDemoTest.java` |
+| Notes | `01-EmbeddingsAndVectorSearch.md`, ... | `Java/04-ai-foundations/`, shared by both tracks |
+
+The `ex`/`Ex` prefix exists because neither language allows a name to start with a digit: Python cannot import a module named `01_...`, and a Java class cannot be named `01...`. Numbering restarts in each chapter, and the same number means the same lesson in both tracks. Unnumbered Java files such as `DataStructuresTests.java`, `DataStructuresCheck.java`, and `FakeClock.java` are test support.
+
 The intended progression is:
 
 1. learn the core CS concept
@@ -123,18 +133,20 @@ Example:
 ```bash
 cd Java/01-data-structures
 javac *.java
-java ArrayExamples
+java Ex01ArrayExamples
 ```
 
-You can do the same in `Java/02-algorithms/` and `Java/03-systems/`.
+You can do the same in `Java/02-algorithms/`, `Java/03-systems/`, and `Java/05-mini-projects/`.
 
-There is also a first runnable mini-project in `Java/05-mini-projects/`:
+Every chapter with code also has tests, with no JUnit or build tool to install. Run them from the chapter folder:
 
 ```bash
-cd Java/05-mini-projects
-javac SimpleVectorSearchDemo.java
-java SimpleVectorSearchDemo
+cd Java/01-data-structures
+javac *.java
+java DataStructuresTests
 ```
+
+See [Java/01-data-structures/README.md](Java/01-data-structures/README.md#testing) for how they work.
 
 ### Python
 
@@ -142,14 +154,14 @@ Python 3.10 or newer is required, with no packages to install.
 
 ```bash
 cd Python/01-data-structures
-python array_examples.py
+python ex01_array_examples.py
 ```
 
 Every Python file with functions or classes has a `test_<name>.py` beside it. Run a chapter's tests from its folder:
 
 ```bash
 cd Python/05-mini-projects
-python simple_vector_search_demo.py
+python ex01_simple_vector_search_demo.py
 python -m unittest -v
 ```
 
@@ -187,11 +199,11 @@ In both tracks, the strongest material is in:
 
 `Java/04-ai-foundations/` holds the chapter's notes on embeddings, transformers, RAG architecture, and evaluation metrics.
 
-The two tracks are not identical:
+The two tracks cover the same methods, with the same behavior and the same test cases, so a learner can switch languages mid-chapter. The remaining differences are deliberate:
 
-- The Python track has a test suite for every chapter, plus material the Java track does not have yet: linked list reversal and slow/fast pointers, post-order and level-order tree traversal, recursive DFS, BFS shortest path, and a token bucket rate limiter.
-- Python's `lru_cache.py` builds LRU from a dict and a doubly linked list. `LRUCache.java` uses `LinkedHashMap` instead.
 - The Java vector search demo has a linear-scan benchmark that the Python version does not.
+- Java's vector search sorts all scores and takes the top k, while Python keeps a running top-k list, so the two show different ranking strategies.
+- Java's merge sort works in place on index ranges, while Python's returns a new list.
 
 ## Contribution Expectations
 
