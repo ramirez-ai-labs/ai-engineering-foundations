@@ -87,8 +87,16 @@ public class KnowledgeGraphBFS {
     /**
      * BFS from startNode up to maxHops hops. Returns all reachable nodes in order of
      * discovery, along with the hop count and the traversal path that reached them.
+     *
+     * The start node itself is not included. Each node appears once, with the
+     * fewest hops that reach it. A start node that is not in the graph has no
+     * outgoing edges, so the result is empty.
      */
     static List<ReachedNode> bfsWithinHops(Map<String, List<Edge>> graph, String startNode, int maxHops) {
+        if (maxHops < 0) {
+            throw new IllegalArgumentException("maxHops must be zero or greater");
+        }
+
         List<ReachedNode> reached = new ArrayList<>();
         Set<String> visited = new HashSet<>();
         Deque<ReachedNode> queue = new ArrayDeque<>();
