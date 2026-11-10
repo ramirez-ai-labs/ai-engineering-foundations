@@ -35,17 +35,17 @@ Those questions show up constantly in AI systems:
 
 | File | What It Teaches | Why It Matters |
 |------|------------------|----------------|
-| `BinarySearch.java` | binary search on sorted input | teaches logarithmic search and boundary reasoning |
-| `MergeSort.java` | divide-and-conquer sorting | teaches recursion, merging, and O(n log n) analysis |
-| `TwoSum.java` | brute force vs hash map optimization | teaches how better data structures improve runtime |
-| `TimeComplexityNotes.java` | examples of O(1), O(n), and O(n^2) | teaches how to reason about runtime from code shape |
+| `Ex01TimeComplexityNotes.java` | examples of O(1), O(n), and O(n^2) | teaches how to reason about runtime from code shape |
+| `Ex02BinarySearch.java` | binary search on sorted input | teaches logarithmic search and boundary reasoning |
+| `Ex03TwoSum.java` | brute force vs hash map optimization | teaches how better data structures improve runtime |
+| `Ex04MergeSort.java` | divide-and-conquer sorting | teaches recursion, merging, and O(n log n) analysis |
 
 ## Suggested Order
 
-1. `TimeComplexityNotes.java`
-2. `BinarySearch.java`
-3. `TwoSum.java`
-4. `MergeSort.java`
+1. `Ex01TimeComplexityNotes.java`
+2. `Ex02BinarySearch.java`
+3. `Ex03TwoSum.java`
+4. `Ex04MergeSort.java`
 
 This order helps a beginner learn the runtime vocabulary first, then apply it.
 
@@ -55,10 +55,10 @@ From this folder:
 
 ```bash
 javac *.java
-java TimeComplexityNotes
-java BinarySearch
-java TwoSum
-java MergeSort
+java Ex01TimeComplexityNotes
+java Ex02BinarySearch
+java Ex03TwoSum
+java Ex04MergeSort
 java AllTests
 ```
 
@@ -110,10 +110,10 @@ java AllTests
 
 ## Practice Prompts
 
-- `BinarySearch.java`: return the insertion position if the target is missing
-- `TwoSum.java`: return all unique pairs instead of one pair
-- `MergeSort.java`: sort an already sorted array and confirm the output stays correct
-- `TimeComplexityNotes.java`: add an O(log n) example method
+- `Ex01TimeComplexityNotes.java`: add an O(log n) example method
+- `Ex02BinarySearch.java`: return the insertion position if the target is missing
+- `Ex03TwoSum.java`: return all unique pairs instead of one pair
+- `Ex04MergeSort.java`: sort an already sorted array and confirm the output stays correct
 
 ## Exit Criteria
 

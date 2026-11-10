@@ -30,8 +30,8 @@ If a learner finishes a mini-project without seeing that chain, the project is m
 
 | File | CS Concepts | AI Engineering Connection |
 |------|-------------|--------------------------|
-| `SimpleVectorSearchDemo.java` | arrays, cosine similarity, sorting, benchmarking | exact vs. approximate nearest-neighbor search; scale breaking point for linear scan |
-| `KnowledgeGraphBFS.java` | graph, BFS, adjacency representation | graph-based retrieval; expanding context beyond direct semantic matches |
+| `Ex01SimpleVectorSearchDemo.java` | arrays, cosine similarity, sorting, benchmarking | exact vs. approximate nearest-neighbor search; scale breaking point for linear scan |
+| `Ex02KnowledgeGraphBFS.java` | graph, BFS, adjacency representation | graph-based retrieval; expanding context beyond direct semantic matches |
 
 ## Project Ideas
 
@@ -82,7 +82,7 @@ What a learner should build:
 
 Current file:
 
-- `SimpleVectorSearchDemo.java`: exact-scan cosine-similarity demo with hand-written embeddings, plus a timing benchmark at 100/1k/10k vectors that shows where linear scan breaks and why ANN indexes exist
+- `Ex01SimpleVectorSearchDemo.java`: exact-scan cosine-similarity demo with hand-written embeddings, plus a timing benchmark at 100/1k/10k vectors that shows where linear scan breaks and why ANN indexes exist
 
 ## Project Quality Bar
 
@@ -100,8 +100,8 @@ From this folder:
 
 ```bash
 javac *.java
-java SimpleVectorSearchDemo
-java KnowledgeGraphBFS
+java Ex01SimpleVectorSearchDemo
+java Ex02KnowledgeGraphBFS
 java AllTests
 ```
 

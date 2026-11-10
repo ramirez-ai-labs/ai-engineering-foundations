@@ -35,11 +35,11 @@ Those questions directly enable AI platforms:
 
 | File | What It Teaches | Important Limitation |
 |------|------------------|----------------------|
-| `InMemoryCache.java` | local cache, TTL, lazy expiration, monotonic time | single-process demo, not distributed and not thread-safe, no maximum size |
-| `LRUCache.java` | LRU eviction built from scratch: HashMap plus doubly linked list with sentinel nodes; connection to KV caching in LLM inference | single-process, not thread-safe, no TTL |
-| `RateLimiter.java` | fixed-window rate limiting, locking | one process only, and allows bursts at window boundaries |
-| `TokenBucket.java` | token bucket rate limiting, lazy refill, weighted cost | one process only |
-| `SimpleQueueDemo.java` | FIFO processing and queue behavior | not a real broker or concurrent queue system |
+| `Ex01SimpleQueueDemo.java` | FIFO processing and queue behavior | not a real broker or concurrent queue system |
+| `Ex02InMemoryCache.java` | local cache, TTL, lazy expiration, monotonic time | single-process demo, not distributed and not thread-safe, no maximum size |
+| `Ex03RateLimiter.java` | fixed-window rate limiting, locking | one process only, and allows bursts at window boundaries |
+| `Ex04TokenBucket.java` | token bucket rate limiting, lazy refill, weighted cost | one process only |
+| `Ex05LRUCache.java` | LRU eviction built from scratch: HashMap plus doubly linked list with sentinel nodes; connection to KV caching in LLM inference | single-process, not thread-safe, no TTL |
 | `RestApiDesignNotes.md` | API resource design, status codes, error shape, AI API concerns | note file only, not executable code |
 | `*Test.java`, `AllTests.java`, `Check.java`, `FakeClock.java`, `ConcurrencyHelper.java` | tests and test helpers | test support only |
 
@@ -49,11 +49,11 @@ From this folder:
 
 ```bash
 javac *.java
-java InMemoryCache
-java LRUCache
-java RateLimiter
-java TokenBucket
-java SimpleQueueDemo
+java Ex01SimpleQueueDemo
+java Ex02InMemoryCache
+java Ex03RateLimiter
+java Ex04TokenBucket
+java Ex05LRUCache
 java AllTests
 ```
 
@@ -65,7 +65,14 @@ Then read `RestApiDesignNotes.md` to connect the demos to actual service design.
 
 ## What To Pay Attention To
 
-### InMemoryCache
+### Ex01SimpleQueueDemo
+
+- queues process work in arrival order
+- they help decouple producers from consumers
+- queue semantics are central to task execution, background jobs, and event processing
+- this example is single-process and purely instructional
+
+### Ex02InMemoryCache
 
 - a cache stores previously computed or fetched values
 - TTL means the value expires after some amount of time
@@ -74,33 +81,26 @@ Then read `RestApiDesignNotes.md` to connect the demos to actual service design.
 - compare `nanoTime` values by subtracting (`now - expiresAt > 0`), never with `<` directly
 - real systems usually use Redis, Memcached, or another external store
 
-### LRUCache
-
-- the map finds a node in O(1) and the doubly linked list reorders it in O(1); neither structure can do both
-- each node stores its own key, so eviction can also remove it from the map
-- sentinel head and tail nodes remove every empty-list and end-of-list special case
-- in production, `LinkedHashMap` with `accessOrder = true` and `removeEldestEntry` does the same job; the Javadoc shows how
-
-### RateLimiter
+### Ex03RateLimiter
 
 - rate limiting protects cost, reliability, and upstream dependencies
 - this example uses a fixed window, which is easy to understand but imperfect
-- fixed windows can allow up to 2N requests across a window boundary; `RateLimiterTest` demonstrates it
+- fixed windows can allow up to 2N requests across a window boundary; `Ex03RateLimiterTest` demonstrates it
 - `allow()` is `synchronized` because "check window, reset, increment" must be one step; two separate `AtomicLong`s are not enough, as the Javadoc explains
 - production systems often use token bucket or sliding-window approaches
 
-### TokenBucket
+### Ex04TokenBucket
 
 - capacity sets the burst size and the refill rate sets the sustained rate
 - refill is computed from elapsed time on each call, so there is no background timer
 - the `cost` argument models token-per-minute limits on LLM APIs, where a long prompt spends more of the budget
 
-### SimpleQueueDemo
+### Ex05LRUCache
 
-- queues process work in arrival order
-- they help decouple producers from consumers
-- queue semantics are central to task execution, background jobs, and event processing
-- this example is single-process and purely instructional
+- the map finds a node in O(1) and the doubly linked list reorders it in O(1); neither structure can do both
+- each node stores its own key, so eviction can also remove it from the map
+- sentinel head and tail nodes remove every empty-list and end-of-list special case
+- in production, `LinkedHashMap` with `accessOrder = true` and `removeEldestEntry` does the same job; the Javadoc shows how
 
 ### REST API Design Notes
 
@@ -127,11 +127,11 @@ Then read `RestApiDesignNotes.md` to connect the demos to actual service design.
 
 ## Suggested Follow-Up Work
 
-- extend `InMemoryCache.java` with a `containsKey` method that respects expiry
-- rewrite `LRUCache.java` on top of `LinkedHashMap`, and confirm `LRUCacheTest` still passes
-- capstone: combine `LRUCache.java` and `InMemoryCache.java` into a cache with both a TTL and a maximum size, with tests for each eviction path
-- add a `waitTimeMillis(cost)` method to `TokenBucket.java` that returns how long until a request of that cost would be allowed
-- build a tiny producer/consumer example after `SimpleQueueDemo.java` with `BlockingQueue`
+- build a tiny producer/consumer example after `Ex01SimpleQueueDemo.java` with `BlockingQueue`
+- extend `Ex02InMemoryCache.java` with a `containsKey` method that respects expiry
+- add a `waitTimeMillis(cost)` method to `Ex04TokenBucket.java` that returns how long until a request of that cost would be allowed
+- rewrite `Ex05LRUCache.java` on top of `LinkedHashMap`, and confirm `Ex05LRUCacheTest` still passes
+- capstone: combine `Ex05LRUCache.java` and `Ex02InMemoryCache.java` into a cache with both a TTL and a maximum size, with tests for each eviction path
 - translate the REST notes into a small mock API spec
 
 ## Exit Criteria

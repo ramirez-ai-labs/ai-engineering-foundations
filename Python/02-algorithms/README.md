@@ -8,20 +8,20 @@ Work through the files in this order, so you learn the runtime vocabulary before
 
 | File | What It Teaches | Why It Matters |
 |------|------------------|----------------|
-| `time_complexity_notes.py` | O(1), O(n), and O(n^2) examples | teaches runtime reasoning from the shape of the code |
-| `binary_search.py` | binary search on sorted input | teaches logarithmic search and boundary reasoning |
-| `two_sum.py` | brute force vs hash map | shows how the right data structure improves runtime |
-| `merge_sort.py` | divide-and-conquer sorting | teaches recursion, merging, and O(n log n) analysis |
+| `ex01_time_complexity_notes.py` | O(1), O(n), and O(n^2) examples | teaches runtime reasoning from the shape of the code |
+| `ex02_binary_search.py` | binary search on sorted input | teaches logarithmic search and boundary reasoning |
+| `ex03_two_sum.py` | brute force vs hash map | shows how the right data structure improves runtime |
+| `ex04_merge_sort.py` | divide-and-conquer sorting | teaches recursion, merging, and O(n log n) analysis |
 
 ## How To Run
 
 From this folder:
 
 ```bash
-python time_complexity_notes.py
-python binary_search.py
-python two_sum.py
-python merge_sort.py
+python ex01_time_complexity_notes.py
+python ex02_binary_search.py
+python ex03_two_sum.py
+python ex04_merge_sort.py
 python -m unittest -v
 ```
 
@@ -42,10 +42,10 @@ The Two Sum tests run every case against both versions, and the merge sort tests
 
 ## Practice Prompts
 
-- `time_complexity_notes.py`: add an O(log n) function
-- `binary_search.py`: return the insertion position when the target is missing
-- `two_sum.py`: return all unique pairs instead of one pair
-- `merge_sort.py`: sort an already sorted list and a list with duplicates
+- `ex01_time_complexity_notes.py`: add an O(log n) function
+- `ex02_binary_search.py`: return the insertion position when the target is missing
+- `ex03_two_sum.py`: return all unique pairs instead of one pair
+- `ex04_merge_sort.py`: sort an already sorted list and a list with duplicates
 
 ## Exit Criteria
 

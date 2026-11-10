@@ -29,7 +29,7 @@ A few features stay because they are the lesson or the safe choice:
 
 ## Chapters
 
-Work through these in order. Each folder's README explains how to run its code.
+Work through these in order. Each folder's README explains how to run its code. Inside a folder, the `exNN_` prefix gives the easy-to-hard order (`ex01_` first). It is `ex01_` rather than `01_` because Python cannot import a module whose name starts with a digit, and the tests import every module.
 
 1. [01-data-structures](01-data-structures/README.md): how information is stored
 2. [02-algorithms](02-algorithms/README.md): how to operate on it efficiently
@@ -46,7 +46,7 @@ Work through these in order. Each folder's README explains how to run its code.
 
 ## Tests
 
-Every file that defines functions or classes has a matching `test_<name>.py` beside it. The three pure demos (`array_examples.py`, `hash_map_examples.py`, `simple_queue_demo.py`) only print, so they have none. Run a chapter's tests from its folder:
+Every file that defines functions or classes has a matching `test_<name>.py` beside it. The three pure demos (`ex01_array_examples.py`, `ex02_hash_map_examples.py`, `ex01_simple_queue_demo.py`) only print, so they have none. Run a chapter's tests from its folder:
 
 ```bash
 cd Python/01-data-structures
@@ -59,10 +59,10 @@ The tests use only the standard library. Time-based tests swap `time.monotonic` 
 
 The tests make step 3 checkable:
 
-1. Pick a function, for example `reverse` in `linked_list_demo.py`.
+1. Pick a function, for example `reverse` in `ex03_linked_list_demo.py`.
 2. Delete its body and leave the signature and docstring.
 3. Write it again from memory.
-4. Run that file's tests: `python -m unittest test_linked_list_demo -v`.
+4. Run that file's tests: `python -m unittest test_ex03_linked_list_demo -v`.
 5. Restore the original with `git checkout -- <file>` when you are done.
 
 You know a topic when your version passes on the first run and you can state its Big-O and where it appears in an AI system without notes.
