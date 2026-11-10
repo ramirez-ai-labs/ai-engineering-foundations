@@ -10,7 +10,7 @@ Short reference for designing APIs that AI services (and clients) will call.
 
 ## Example response shapes
 
-**Success (e.g. GET /embeddings):**
+**Success (e.g. POST /embeddings, which creates embeddings from the input text in the request body):**
 
 ```json
 {
@@ -56,4 +56,4 @@ Short reference for designing APIs that AI services (and clients) will call.
 - **Timeouts** — LLM calls can be slow; set generous timeouts and document them.
 - **Idempotency** — For non-idempotent operations, support `Idempotency-Key` header so clients can retry safely.
 
-Use these notes alongside the Java demos in this folder to connect code (cache, rate limiter, queue) to API behavior.
+Use these notes alongside the cache, rate limiter, and queue demos in either track's `03-systems/` folder to connect code to API behavior.

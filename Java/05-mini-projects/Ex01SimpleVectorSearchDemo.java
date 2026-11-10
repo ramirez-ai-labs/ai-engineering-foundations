@@ -20,8 +20,9 @@ import java.util.Random;
  *   Exact cosine similarity over N vectors is O(N * D) where D is the embedding dimension.
  *   At N=10k and D=1536 (text-embedding-3-small) that is ~15M multiply-add operations
  *   per query. At N=10M it becomes ~15B. ANN indexes trade a small accuracy loss for
- *   O(log N) or sub-linear query time by building a navigable graph (HNSW) or
- *   inverted quantized index (IVF) over the vector space at index time.
+ *   sub-linear query time by doing work at index time: a navigable graph (HNSW, roughly
+ *   O(log N) per query in practice) or an inverted file of clusters (IVF, which scans
+ *   only the few clusters nearest the query).
  *   The benchmark below makes this degradation visible even in a toy setting.
  */
 public class Ex01SimpleVectorSearchDemo {
@@ -185,9 +186,10 @@ public class Ex01SimpleVectorSearchDemo {
         System.out.println("Interpretation:");
         System.out.println("  Latency grows roughly linearly with corpus size — O(N * D).");
         System.out.println("  At production scale (millions of vectors, D=1536), exact scan");
-        System.out.println("  is too slow for real-time queries. ANN indexes like HNSW or IVF");
-        System.out.println("  reduce query time to O(log N) by building a navigable graph or");
-        System.out.println("  quantized index over the vector space at index build time.");
+        System.out.println("  is too slow for real-time queries. ANN indexes make query time");
+        System.out.println("  sub-linear by doing work at index build time: HNSW builds a");
+        System.out.println("  navigable graph (roughly O(log N) per query in practice), and IVF");
+        System.out.println("  clusters vectors so a query scans only the nearest few clusters.");
         System.out.println("  The tradeoff: ANN may miss a small fraction of true nearest");
         System.out.println("  neighbors (controlled by an 'ef' or 'nprobe' parameter).");
     }

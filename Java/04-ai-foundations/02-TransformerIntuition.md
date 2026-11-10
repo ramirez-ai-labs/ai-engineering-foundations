@@ -55,9 +55,11 @@ This is structurally similar to the vector search retrieval in `Ex01SimpleVector
 - Q is the query embedding
 - K is the document embedding
 - V is the document content
-- softmax(QK^T) is cosine similarity normalized into a probability distribution
+- QK^T is the similarity score, and softmax turns the scores into weights that sum to 1
 
-The difference is that attention runs this lookup for every token in the sequence simultaneously, and the weights are learned rather than fixed.
+One precise difference: QK^T is a scaled *dot product*, not cosine similarity. Cosine divides by both vector lengths, so only direction matters. Attention does not normalize, so a key's length also affects its score. The `/ sqrt(d_k)` term only keeps dot products from growing with the dimension and saturating the softmax.
+
+The other differences are that attention runs this lookup for every token in the sequence simultaneously, the Q, K, and V projections are learned rather than fixed, and the result is a weighted blend of every value instead of a top-k list.
 
 ## Context Window
 
@@ -114,7 +116,7 @@ None of those are needed to reason well about prompt design, retrieval, chunking
 
 ## Suggested Next Steps
 
-1. Read `01-EmbeddingsAndVectorSearch.md` to see how embeddings are produced by a transformer encoder.
+1. Read `01-EmbeddingsAndVectorSearch.md` to see how the vectors a model produces are stored, compared, and retrieved.
 2. Read `03-RAGArchitecture.md` to see how retrieval and generation connect at the system level.
-3. Try varying chunk sizes in `Ex01SimpleVectorSearchDemo.java` and think about what a real tokenizer would do.
+3. Take one paragraph, split it into chunks of different sizes by hand, and estimate each chunk's token count at about 4 characters per token. Think about which chunk boundaries would separate a question from its answer.
 4. Look up the tokenizer for a model you use (e.g. `tiktoken` for GPT models, `sentencepiece` for Gemini) and count how a sample document tokenizes.
