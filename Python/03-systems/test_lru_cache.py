@@ -89,21 +89,13 @@ class EvictionTest(unittest.TestCase):
 class LinkIntegrityTest(unittest.TestCase):
     def test_walking_backwards_matches_walking_forwards(self) -> None:
         # A broken prev pointer would pass the forward-only tests above.
-        # This test reaches into the private sentinels, so if you rebuild the
-        # class from scratch, keep the names _head, _tail, prev, and key.
         cache = filled_cache(4, ["a", "b", "c", "d", "e"])
         cache.get("c")
         cache.put("b", "B2")
 
-        backwards: list[str] = []
-        current = cache._tail.prev
-        while current is not cache._head:
-            backwards.append(current.key)
-            current = current.prev
-
         forwards = cache.keys_most_recent_first()
         forwards.reverse()
-        self.assertEqual(backwards, forwards)
+        self.assertEqual(cache.keys_least_recent_first(), forwards)
 
 
 if __name__ == "__main__":

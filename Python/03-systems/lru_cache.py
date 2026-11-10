@@ -93,6 +93,15 @@ class LRUCache:
             current = current.next
         return keys
 
+    def keys_least_recent_first(self) -> list[str]:
+        """Keys walked from the tail via prev pointers. Tests use it to check both directions."""
+        keys: list[str] = []
+        current = self._tail.prev
+        while current is not self._head:
+            keys.append(current.key)
+            current = current.prev
+        return keys
+
     def _add_to_front(self, node: _Node) -> None:
         # Splice node in between head and the current first entry.
         first = self._head.next

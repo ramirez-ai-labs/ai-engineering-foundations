@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.LongSupplier;
 
 /**
  * Simple in-memory cache - key/value store with optional TTL (time-to-live).
@@ -11,43 +12,61 @@ import java.util.Map;
  * This demo uses lazy expiration:
  * - expired entries are removed when you call get()
  * - size() also cleans up expired entries before reporting
+ *
+ * Clock choice: TTLs use System.nanoTime(), a monotonic clock, rather than
+ * System.currentTimeMillis(), which is wall-clock time. If NTP or an operator
+ * moves the system clock, wall-clock TTLs expire early or live far too long;
+ * monotonic time only moves forward. nanoTime values are only meaningful as
+ * differences, so expiry is checked with (now - expiresAt > 0), which also stays
+ * correct if the counter overflows.
+ *
+ * The clock is a constructor argument so tests can move time by hand instead of
+ * sleeping. Normal code uses the one-argument constructor.
+ *
+ * Limitations: it is not thread-safe, and it has no maximum size, so a real cache
+ * would also need an eviction policy such as LRU (see LRUCache.java) to keep
+ * memory bounded.
  */
 public class InMemoryCache<K, V> {
 
     private final Map<K, V> store = new HashMap<>();
-    private final Map<K, Long> expiry = new HashMap<>();
-    private final long ttlMs; // 0 = no expiry
+    // Two maps share the same keys: one for values, one for expiry times.
+    private final Map<K, Long> expiresAtNanos = new HashMap<>();
+    private final long ttlNanos; // 0 = no expiry
+    private final LongSupplier nanoClock;
 
+    /** ttlMs <= 0 means entries never expire. */
     public InMemoryCache(long ttlMs) {
-        this.ttlMs = ttlMs;
+        this(ttlMs, System::nanoTime);
+    }
+
+    /** Same as above, reading time from nanoClock (used by tests). */
+    InMemoryCache(long ttlMs, LongSupplier nanoClock) {
+        this.ttlNanos = ttlMs > 0 ? ttlMs * 1_000_000L : 0;
+        this.nanoClock = nanoClock;
     }
 
     public void put(K key, V value) {
         store.put(key, value);
-        if (ttlMs > 0) {
-            expiry.put(key, System.currentTimeMillis() + ttlMs);
-        } else {
-            expiry.remove(key);
+        if (ttlNanos > 0) {
+            expiresAtNanos.put(key, nanoClock.getAsLong() + ttlNanos);
         }
     }
 
     public V get(K key) {
-        V value = store.get(key);
-        if (value == null) return null;
-        if (ttlMs > 0) {
-            Long exp = expiry.get(key);
-            if (exp != null && System.currentTimeMillis() > exp) {
-                store.remove(key);
-                expiry.remove(key);
-                return null;
-            }
+        if (!store.containsKey(key)) {
+            return null;
         }
-        return value;
+        if (isExpired(key, nanoClock.getAsLong())) {
+            remove(key);
+            return null;
+        }
+        return store.get(key);
     }
 
     public void remove(K key) {
         store.remove(key);
-        expiry.remove(key);
+        expiresAtNanos.remove(key);
     }
 
     public int size() {
@@ -55,17 +74,22 @@ public class InMemoryCache<K, V> {
         return store.size();
     }
 
-    private void removeExpiredEntries() {
-        if (ttlMs <= 0) {
-            return;
+    private boolean isExpired(K key, long now) {
+        Long expiresAt = expiresAtNanos.get(key);
+        // Keys with no expiry time never expire.
+        if (expiresAt == null) {
+            return false;
         }
+        return now - expiresAt > 0;
+    }
 
-        long now = System.currentTimeMillis();
-        for (Map.Entry<K, Long> entry : new HashMap<>(expiry).entrySet()) {
-            if (now > entry.getValue()) {
-                K key = entry.getKey();
-                store.remove(key);
-                expiry.remove(key);
+    private void removeExpiredEntries() {
+        long now = nanoClock.getAsLong();
+        // Copy the keys first: removing from a HashMap while iterating it throws
+        // ConcurrentModificationException.
+        for (K key : new HashMap<>(store).keySet()) {
+            if (isExpired(key, now)) {
+                remove(key);
             }
         }
     }
@@ -79,7 +103,12 @@ public class InMemoryCache<K, V> {
         System.out.println("get(missing): " + cache.get("missing"));
         System.out.println("size: " + cache.size());
 
-        // Sleep long enough for both entries to expire.
+        // Remove user:1 while it is still live, so this shows remove() working.
+        cache.remove("user:1");
+        System.out.println("after remove, get(user:1): " + cache.get("user:1"));
+        System.out.println("size after remove: " + cache.size());
+
+        // Sleep long enough for the remaining entry to expire.
         try {
             Thread.sleep(2100);
         } catch (InterruptedException e) {
@@ -89,8 +118,5 @@ public class InMemoryCache<K, V> {
 
         System.out.println("after TTL, get(user:2): " + cache.get("user:2"));
         System.out.println("size after TTL cleanup: " + cache.size());
-
-        cache.remove("user:1");
-        System.out.println("after remove, get(user:1): " + cache.get("user:1"));
     }
 }
