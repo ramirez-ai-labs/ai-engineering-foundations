@@ -39,8 +39,8 @@ public class Ex04TokenBucket {
 
     /** Same as above, reading time from nanoClock (used by tests). */
     Ex04TokenBucket(double capacity, double refillPerSecond, LongSupplier nanoClock) {
-        if (capacity <= 0 || refillPerSecond <= 0) {
-            throw new IllegalArgumentException("capacity and refillPerSecond must be positive");
+        if (!isPositiveFinite(capacity) || !isPositiveFinite(refillPerSecond)) {
+            throw new IllegalArgumentException("capacity and refillPerSecond must be positive finite numbers");
         }
         this.capacity = capacity;
         this.refillPerSecond = refillPerSecond;
@@ -57,8 +57,8 @@ public class Ex04TokenBucket {
 
     /** Spend cost tokens if available. Returns true if the request is allowed. */
     public boolean allow(double cost) {
-        if (cost <= 0) {
-            throw new IllegalArgumentException("cost must be positive");
+        if (!isPositiveFinite(cost)) {
+            throw new IllegalArgumentException("cost must be a positive finite number");
         }
         if (cost > capacity) {
             // The bucket can never hold this many tokens, so the request could
@@ -76,6 +76,15 @@ public class Ex04TokenBucket {
             }
             return false;
         }
+    }
+
+    /**
+     * "value <= 0" alone is not enough: NaN fails every comparison, so it would
+     * slip through, and infinity passes "> 0" but makes the limit meaningless
+     * (infinite capacity allows every request).
+     */
+    private static boolean isPositiveFinite(double value) {
+        return Double.isFinite(value) && value > 0;
     }
 
     private void refill(long now) {

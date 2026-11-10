@@ -7,10 +7,12 @@ or sliding window; this is the basic idea.
 Known fixed-window weakness: a client can send up to 2N requests across a
 window boundary (N at the end of one window, N at the start of the next).
 
-Thread safety: the Java version uses AtomicLong; here a Lock makes the
-"check window, reset, increment" sequence atomic as a whole.
+Thread safety: a Lock makes the "check window, reset, increment" sequence
+atomic as a whole. Separate atomic variables would not be enough; the Java
+version's Javadoc explains why.
 """
 
+import math
 import threading
 import time
 
@@ -18,8 +20,11 @@ import time
 class RateLimiter:
     def __init__(self, max_requests: int, window_seconds: float) -> None:
         """Allow at most max_requests per window_seconds."""
-        if max_requests <= 0 or window_seconds <= 0:
-            raise ValueError("max_requests and window_seconds must be positive")
+        # math.isfinite rejects NaN, which "window_seconds <= 0" would let through
+        # (NaN fails every comparison, so the window would never reset), and
+        # infinity, which would also mean a window that never resets.
+        if max_requests <= 0 or not math.isfinite(window_seconds) or window_seconds <= 0:
+            raise ValueError("max_requests and window_seconds must be positive finite numbers")
         self._max_requests = max_requests
         self._window = window_seconds
         self._window_start = time.monotonic()

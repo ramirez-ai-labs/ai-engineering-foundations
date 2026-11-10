@@ -1,3 +1,4 @@
+import java.util.concurrent.TimeUnit;
 import java.util.function.LongSupplier;
 
 /**
@@ -43,7 +44,12 @@ public class Ex03RateLimiter {
             throw new IllegalArgumentException("maxRequests and windowMs must be positive");
         }
         this.maxRequests = maxRequests;
-        this.windowNanos = windowMs * 1_000_000L;
+        // Not windowMs * 1_000_000: a huge window would overflow to a negative
+        // number, every request would start a new window, and the limiter would
+        // allow everything. toNanos saturates at Long.MAX_VALUE instead of
+        // wrapping, so a huge window stays huge. A security control must fail
+        // closed on bad input, never open.
+        this.windowNanos = TimeUnit.MILLISECONDS.toNanos(windowMs);
         this.nanoClock = nanoClock;
         // Monotonic time, so a system clock change cannot reset or stall a window.
         this.windowStart = nanoClock.getAsLong();

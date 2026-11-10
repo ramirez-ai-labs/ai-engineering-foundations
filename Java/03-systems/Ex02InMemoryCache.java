@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.LongSupplier;
 
 /**
@@ -42,7 +43,9 @@ public class Ex02InMemoryCache<K, V> {
 
     /** Same as above, reading time from nanoClock (used by tests). */
     Ex02InMemoryCache(long ttlMs, LongSupplier nanoClock) {
-        this.ttlNanos = ttlMs > 0 ? ttlMs * 1_000_000L : 0;
+        // toNanos saturates at Long.MAX_VALUE; ttlMs * 1_000_000 could overflow
+        // to a negative value and silently turn a huge TTL into "never expires".
+        this.ttlNanos = ttlMs > 0 ? TimeUnit.MILLISECONDS.toNanos(ttlMs) : 0;
         this.nanoClock = nanoClock;
     }
 

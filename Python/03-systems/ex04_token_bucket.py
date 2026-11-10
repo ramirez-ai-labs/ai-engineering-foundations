@@ -21,14 +21,22 @@ Limitations: one process only. A shared limit across servers keeps the bucket
 state in a store such as Redis and updates it atomically (e.g. a Lua script).
 """
 
+import math
 import threading
 import time
 
 
+def _is_positive_finite(value: float) -> bool:
+    # "value <= 0" alone is not enough: NaN fails every comparison, so it would
+    # slip through, and infinity passes "> 0" but makes the limit meaningless
+    # (infinite capacity allows every request).
+    return math.isfinite(value) and value > 0
+
+
 class TokenBucket:
     def __init__(self, capacity: float, refill_per_second: float) -> None:
-        if capacity <= 0 or refill_per_second <= 0:
-            raise ValueError("capacity and refill_per_second must be positive")
+        if not _is_positive_finite(capacity) or not _is_positive_finite(refill_per_second):
+            raise ValueError("capacity and refill_per_second must be positive finite numbers")
         self._capacity = capacity
         self._refill_per_second = refill_per_second
         # Start full, so a new client can burst immediately.
@@ -38,8 +46,8 @@ class TokenBucket:
 
     def allow(self, cost: float = 1.0) -> bool:
         """Spend `cost` tokens if available. Return True if the request is allowed."""
-        if cost <= 0:
-            raise ValueError("cost must be positive")
+        if not _is_positive_finite(cost):
+            raise ValueError("cost must be a positive finite number")
         if cost > self._capacity:
             # The bucket can never hold this many tokens, so the request could
             # never succeed. Fail loudly instead of rejecting it forever.
