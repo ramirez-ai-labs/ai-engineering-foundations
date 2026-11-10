@@ -126,15 +126,17 @@ javac *.java
 java ArrayExamples
 ```
 
-You can do the same in `Java/02-algorithms/` and `Java/03-systems/`.
+You can do the same in `Java/02-algorithms/`, `Java/03-systems/`, and `Java/05-mini-projects/`.
 
-There is also a first runnable mini-project in `Java/05-mini-projects/`:
+Every chapter with code also has tests, with no JUnit or build tool to install. Run them from the chapter folder:
 
 ```bash
-cd Java/05-mini-projects
-javac SimpleVectorSearchDemo.java
-java SimpleVectorSearchDemo
+cd Java/01-data-structures
+javac *.java
+java AllTests
 ```
+
+See [Java/01-data-structures/README.md](Java/01-data-structures/README.md#testing) for how they work.
 
 ### Python
 
@@ -187,11 +189,11 @@ In both tracks, the strongest material is in:
 
 `Java/04-ai-foundations/` holds the chapter's notes on embeddings, transformers, RAG architecture, and evaluation metrics.
 
-The two tracks are not identical:
+The two tracks cover the same methods, with the same behavior and the same test cases, so a learner can switch languages mid-chapter. The remaining differences are deliberate:
 
-- The Python track has a test suite for every chapter, plus material the Java track does not have yet: linked list reversal and slow/fast pointers, post-order and level-order tree traversal, recursive DFS, BFS shortest path, and a token bucket rate limiter.
-- Python's `lru_cache.py` builds LRU from a dict and a doubly linked list. `LRUCache.java` uses `LinkedHashMap` instead.
 - The Java vector search demo has a linear-scan benchmark that the Python version does not.
+- Java's vector search sorts all scores and takes the top k, while Python keeps a running top-k list, so the two show different ranking strategies.
+- Java's merge sort works in place on index ranges, while Python's returns a new list.
 
 ## Contribution Expectations
 

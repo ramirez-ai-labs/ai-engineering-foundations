@@ -16,7 +16,7 @@ These are teaching examples, not production infrastructure.
 
 For API design, read the language-neutral [REST API design notes](../../Java/03-systems/RestApiDesignNotes.md).
 
-`lru_cache.py` builds the linked list by hand. The Java track's [LRUCache.java](../../Java/03-systems/LRUCache.java) gets the same behavior from `LinkedHashMap`, which matches Python's `OrderedDict`. Interviewers usually ask for the hand-built version.
+`lru_cache.py` builds the linked list by hand, as does the Java track's [LRUCache.java](../../Java/03-systems/LRUCache.java). Interviewers usually ask for the hand-built version. In production, use `OrderedDict` in Python or `LinkedHashMap` in Java.
 
 ## How To Run
 

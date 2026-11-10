@@ -59,7 +59,10 @@ java TimeComplexityNotes
 java BinarySearch
 java TwoSum
 java MergeSort
+java AllTests
 ```
+
+`java AllTests` runs every test in this folder, and each `*Test.java` also runs on its own. The Two Sum tests run every case against both versions, and the merge sort tests compare against `Arrays.sort` on random input with a fixed seed. See [01-data-structures/README.md](../01-data-structures/README.md#testing) for how the tests work and how to use them to check a from-scratch rewrite.
 
 ## What To Pay Attention To
 
