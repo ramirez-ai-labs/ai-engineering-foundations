@@ -38,9 +38,37 @@ python -m unittest -v
 
 Read [Embeddings and Vector Search](../../Java/04-ai-foundations/EmbeddingsAndVectorSearch.md) for the concepts behind this demo.
 
+## Knowledge Graph BFS
+
+`knowledge_graph_bfs.py` expands a query concept into every related concept within N hops of a small, directed AI-topic graph. Graph-based retrieval (such as GraphRAG) uses this step to pull in context that is logically connected but not necessarily close in embedding space.
+
+It combines:
+
+- a dict of edge lists as the adjacency structure, with named nodes and labeled edges
+- the BFS from `01-data-structures/graph_dfs_and_bfs.py`, plus a hop limit
+- a recorded path per node, so you can see why each concept was retrieved
+
+### How To Run
+
+From this folder:
+
+```bash
+python knowledge_graph_bfs.py
+python -m unittest test_knowledge_graph_bfs -v
+```
+
+### What This Demo Simplifies
+
+- the graph is hand-written and tiny; real knowledge graphs are extracted from documents and stored in a graph database
+- edges are unweighted, so every relation counts as equally relevant
+- there is no cap on neighbors per hop; a highly connected node can flood the LLM context
+
+### Practice Prompts
+
+- add a `relations` filter so the traversal follows only some edge types (for example, only `evaluated_by`)
+- cap the number of neighbors expanded per node, and explain what that protects against
+- treat edges as two-way, and predict which new nodes appear from `Embeddings`
+
 ## Java-Only Material
 
-The Java track goes further in two places that have no Python version yet:
-
-- [SimpleVectorSearchDemo.java](../../Java/05-mini-projects/SimpleVectorSearchDemo.java) adds a timing benchmark showing where linear scan breaks down
-- [KnowledgeGraphBFS.java](../../Java/05-mini-projects/KnowledgeGraphBFS.java) applies BFS to graph-based retrieval
+[SimpleVectorSearchDemo.java](../../Java/05-mini-projects/SimpleVectorSearchDemo.java) adds a timing benchmark showing where linear scan breaks down. It has no Python version yet.

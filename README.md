@@ -145,13 +145,15 @@ cd Python/01-data-structures
 python array_examples.py
 ```
 
-The mini-project also has tests:
+Every Python file with functions or classes has a `test_<name>.py` beside it. Run a chapter's tests from its folder:
 
 ```bash
 cd Python/05-mini-projects
 python simple_vector_search_demo.py
 python -m unittest -v
 ```
+
+The tests also make step 4 of the recommended approach checkable: delete a function body, rewrite it, and run the tests. See [Python/README.md](Python/README.md#re-implementing-from-scratch).
 
 ## What Good Learning Looks Like Here
 
@@ -181,11 +183,15 @@ In both tracks, the strongest material is in:
 - `01-data-structures/`
 - `02-algorithms/`
 - `03-systems/`
-- the vector search demo in `05-mini-projects/`
+- the vector search and knowledge graph demos in `05-mini-projects/`
 
 `Java/04-ai-foundations/` holds the chapter's notes on embeddings, transformers, RAG architecture, and evaluation metrics.
 
-The Java track also has three things the Python track does not have yet: `LRUCache.java`, `KnowledgeGraphBFS.java`, and a linear-scan benchmark in its vector search demo.
+The two tracks are not identical:
+
+- The Python track has a test suite for every chapter, plus material the Java track does not have yet: linked list reversal and slow/fast pointers, post-order and level-order tree traversal, recursive DFS, BFS shortest path, and a token bucket rate limiter.
+- Python's `lru_cache.py` builds LRU from a dict and a doubly linked list. `LRUCache.java` uses `LinkedHashMap` instead.
+- The Java vector search demo has a linear-scan benchmark that the Python version does not.
 
 ## Contribution Expectations
 
