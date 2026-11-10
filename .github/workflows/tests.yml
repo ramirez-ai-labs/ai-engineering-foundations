@@ -1,0 +1,86 @@
+# Runs every chapter's tests in both tracks on each push to main and each PR.
+#
+# Versions: the documented minimums (Python 3.10, JDK 11) catch use of newer
+# language features; the latest versions catch deprecations.
+# Security: read-only token, no persisted git credentials, and third-party
+# actions pinned to full commit SHAs (the tag is in the trailing comment).
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.x"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run each chapter's tests
+        run: |
+          set -euo pipefail
+          for chapter in Python/0*/; do
+            # Skip chapters with no tests: Python 3.12+ exits with status 5
+            # when unittest finds nothing to run.
+            if ! ls "$chapter"test_*.py > /dev/null 2>&1; then
+              echo "::notice::$chapter has no tests, skipping"
+              continue
+            fi
+            echo "::group::$chapter"
+            (cd "$chapter" && python -m unittest -v)
+            echo "::endgroup::"
+          done
+
+  java:
+    name: JDK ${{ matrix.java-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: ["11", "21"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+      - name: Compile the whole Java tree as one project
+        # Catches duplicate default-package class names across chapters, which
+        # break IDE builds even when each folder compiles on its own.
+        run: javac -Xlint:all -Werror -d "$RUNNER_TEMP/all" Java/*/*.java
+      - name: Run each chapter's tests
+        run: |
+          set -euo pipefail
+          for chapter in Java/0*/; do
+            runner_file=$(ls "$chapter"*Tests.java 2> /dev/null || true)
+            if [ -z "$runner_file" ]; then
+              echo "::notice::$chapter has no test runner, skipping"
+              continue
+            fi
+            runner=$(basename "$runner_file" .java)
+            echo "::group::$chapter ($runner)"
+            # Compile each folder on its own, exactly as the READMEs instruct.
+            (cd "$chapter" && javac -d "$RUNNER_TEMP/$runner" *.java && java -cp "$RUNNER_TEMP/$runner" "$runner")
+            echo "::endgroup::"
+          done
