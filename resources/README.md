@@ -22,7 +22,7 @@ The purpose of `resources/` is to support the numbered learning path, not to rep
 
 ## Current Files
 
-- `repo-positioning.md`: explains how this repo differs from deeper or more specialized repos
+None yet. This README describes what belongs here. Until companion notes are added, the chapter READMEs and the notes in `Java/04-ai-foundations/` are the study material.
 
 ## Recommendation
 

@@ -22,10 +22,7 @@ The repository is organized as a textbook-style curriculum:
 │   └── 01-data-structures/ ... 05-mini-projects/
 ├── Python/
 │   └── 01-data-structures/ ... 05-mini-projects/
-├── resources/
-├── blog-assets/
-├── talks/
-└── workshop-notes/
+└── resources/
 ```
 
 Interpretation (the numbered chapters are the same in both language tracks):
@@ -35,6 +32,17 @@ Interpretation (the numbered chapters are the same in both language tracks):
 - `04-ai-foundations/`: practical ML and LLM foundations explained clearly.
 - `05-mini-projects/`: realistic integration projects that combine systems and AI concepts.
 - `resources/`: checklists, study aids, diagrams, and supporting references.
+
+## File Conventions
+
+These keep the easy-to-hard path visible and both tracks in step. Follow them when adding or moving files.
+
+- **Numbering:** inside each chapter, lesson files are numbered from easiest to hardest, and numbering restarts in each chapter. Python modules are `exNN_<name>.py` and Java classes are `ExNN<Name>.java`. The letter prefix is required: Python cannot import a module whose name starts with a digit, and a Java class name cannot start with one. Written notes use `NN-<Name>.md`.
+- **Track parity:** the same number is the same lesson in both tracks, with the same methods, behavior, and test cases. A new lesson in one track needs its counterpart in the other, or a note in the root README's "Current Scope" explaining the difference.
+- **Inserting a lesson:** renumber the files after it with `git mv` so history follows them, then update every reference: imports, run commands, README tables, and the chapter 04 notes.
+- **Tests sit beside their module:** `test_exNN_<name>.py` in Python, and `ExNN<Name>Test.java` with a static `run()` method in Java. Add each new Java test class to the chapter's runner.
+- **Java test support stays unnumbered and unique:** each chapter has its own `<Chapter>Check.java` assertion helper and `<Chapter>Tests.java` runner (for example `SystemsCheck` and `SystemsTests`). Every Java file is in the default package, so two classes with the same name in different chapters break `javac Java/*/*.java` and IDE builds.
+- **Requirements:** Python 3.10+ and JDK 11+, standard library only. The Java code must not need a build tool.
 
 ## Collaborator Profile
 
