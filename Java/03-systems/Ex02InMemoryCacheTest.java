@@ -9,19 +9,19 @@ public class Ex02InMemoryCacheTest {
     static void basicOperations() {
         Ex02InMemoryCache<String, String> cache = new Ex02InMemoryCache<>(0);
         cache.put("k", "v");
-        Check.equal("v", cache.get("k"), "put then get");
-        Check.isNull(cache.get("missing"), "missing key returns null");
+        SystemsCheck.equal("v", cache.get("k"), "put then get");
+        SystemsCheck.isNull(cache.get("missing"), "missing key returns null");
 
         cache.put("k", "new");
-        Check.equal("new", cache.get("k"), "put overwrites");
-        Check.equal(1, cache.size(), "overwrite keeps one entry");
+        SystemsCheck.equal("new", cache.get("k"), "put overwrites");
+        SystemsCheck.equal(1, cache.size(), "overwrite keeps one entry");
 
         cache.remove("k");
-        Check.isNull(cache.get("k"), "remove deletes the entry");
-        Check.equal(0, cache.size(), "size after remove");
+        SystemsCheck.isNull(cache.get("k"), "remove deletes the entry");
+        SystemsCheck.equal(0, cache.size(), "size after remove");
 
         cache.remove("missing");
-        Check.equal(0, cache.size(), "removing a missing key is a no-op");
+        SystemsCheck.equal(0, cache.size(), "removing a missing key is a no-op");
     }
 
     static void ttl() {
@@ -29,12 +29,12 @@ public class Ex02InMemoryCacheTest {
         Ex02InMemoryCache<String, String> cache = new Ex02InMemoryCache<>(10_000, clock);
         cache.put("k", "v");
         clock.advanceMillis(9_999);
-        Check.equal("v", cache.get("k"), "entry is live before TTL");
+        SystemsCheck.equal("v", cache.get("k"), "entry is live before TTL");
         clock.advanceMillis(1);
         // The check is now - expiresAt > 0, so the boundary instant is still live.
-        Check.equal("v", cache.get("k"), "entry still live exactly at TTL");
+        SystemsCheck.equal("v", cache.get("k"), "entry still live exactly at TTL");
         clock.advanceMillis(1);
-        Check.isNull(cache.get("k"), "entry expires after TTL");
+        SystemsCheck.isNull(cache.get("k"), "entry expires after TTL");
 
         clock = new FakeClock();
         cache = new Ex02InMemoryCache<>(10_000, clock);
@@ -42,7 +42,7 @@ public class Ex02InMemoryCacheTest {
         clock.advanceMillis(8_000);
         cache.put("k", "v2");
         clock.advanceMillis(8_000);
-        Check.equal("v2", cache.get("k"), "put again resets the TTL");
+        SystemsCheck.equal("v2", cache.get("k"), "put again resets the TTL");
 
         clock = new FakeClock();
         cache = new Ex02InMemoryCache<>(10_000, clock);
@@ -51,18 +51,26 @@ public class Ex02InMemoryCacheTest {
         cache.put("new", "v");
         clock.advanceMillis(6_000);
         // "old" is 12s old (expired), "new" is 6s old (live).
-        Check.equal(1, cache.size(), "size ignores expired entries");
-        Check.equal("v", cache.get("new"), "live entry survives cleanup");
+        SystemsCheck.equal(1, cache.size(), "size ignores expired entries");
+        SystemsCheck.equal("v", cache.get("new"), "live entry survives cleanup");
 
         clock = new FakeClock();
         cache = new Ex02InMemoryCache<>(0, clock);
         cache.put("k", "v");
         clock.advanceMillis(1_000_000_000L);
-        Check.equal("v", cache.get("k"), "zero TTL never expires");
+        SystemsCheck.equal("v", cache.get("k"), "zero TTL never expires");
+
+        // Regression: ttlMs * 1_000_000 used to overflow for huge TTLs. With
+        // saturation, a huge TTL behaves as "effectively forever", on purpose.
+        clock = new FakeClock();
+        cache = new Ex02InMemoryCache<>(Long.MAX_VALUE, clock);
+        cache.put("k", "v");
+        clock.advanceMillis(365L * 24 * 60 * 60 * 1000);
+        SystemsCheck.equal("v", cache.get("k"), "huge TTL entry is still live a year later");
     }
 
     public static void main(String[] args) {
         run();
-        Check.finish();
+        SystemsCheck.finish();
     }
 }

@@ -41,7 +41,7 @@ Those questions directly enable AI platforms:
 | `Ex04TokenBucket.java` | token bucket rate limiting, lazy refill, weighted cost | one process only |
 | `Ex05LRUCache.java` | LRU eviction built from scratch: HashMap plus doubly linked list with sentinel nodes; connection to KV caching in LLM inference | single-process, not thread-safe, no TTL |
 | `RestApiDesignNotes.md` | API resource design, status codes, error shape, AI API concerns | note file only, not executable code |
-| `*Test.java`, `AllTests.java`, `Check.java`, `FakeClock.java`, `ConcurrencyHelper.java` | tests and test helpers | test support only |
+| `*Test.java`, `SystemsTests.java`, `SystemsCheck.java`, `FakeClock.java`, `ConcurrencyHelper.java` | tests and test helpers | test support only |
 
 ## How To Run
 
@@ -54,7 +54,7 @@ java Ex02InMemoryCache
 java Ex03RateLimiter
 java Ex04TokenBucket
 java Ex05LRUCache
-java AllTests
+java SystemsTests
 ```
 
 The cache, rate limiter, and token bucket demos pause for a second or two, so they can show time-based behavior.

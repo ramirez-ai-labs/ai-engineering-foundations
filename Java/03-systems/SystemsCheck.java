@@ -7,15 +7,18 @@ import java.util.Objects;
  * Each check records a pass or prints a failure; finish() prints a summary and
  * exits with status 1 if anything failed, so scripts and CI can detect it.
  *
- * An identical copy lives in every chapter folder, so each folder still compiles
- * on its own with "javac *.java". In a real project you would use JUnit.
+ * Each chapter folder has its own copy under a chapter-specific name, so every
+ * folder still compiles on its own with "javac *.java". The names must differ:
+ * every class here is in the default package, so two classes both named Check
+ * would clash when the whole Java/ tree is compiled together or opened in an
+ * IDE. In a real project you would use JUnit and packages.
  */
-final class Check {
+final class SystemsCheck {
 
     private static int passed = 0;
     private static int failed = 0;
 
-    private Check() {
+    private SystemsCheck() {
     }
 
     static void equal(Object expected, Object actual, String name) {

@@ -6,8 +6,8 @@
 public class Ex03TwoSumTest {
 
     static void check(int[] nums, int target, int[] expected, String name) {
-        Check.equal(expected, Ex03TwoSum.twoSumBrute(nums, target), "brute: " + name);
-        Check.equal(expected, Ex03TwoSum.twoSum(nums, target), "map: " + name);
+        AlgorithmsCheck.equal(expected, Ex03TwoSum.twoSumBrute(nums, target), "brute: " + name);
+        AlgorithmsCheck.equal(expected, Ex03TwoSum.twoSum(nums, target), "map: " + name);
     }
 
     static void run() {
@@ -23,12 +23,12 @@ public class Ex03TwoSumTest {
 
         int[] nums = { 10, -2, 7, 5, 8, 1 };
         int[] pair = Ex03TwoSum.twoSum(nums, 13);
-        Check.isTrue(pair[0] < pair[1], "indices are in increasing order");
-        Check.equal(13, nums[pair[0]] + nums[pair[1]], "indices point at values that sum to target");
+        AlgorithmsCheck.isTrue(pair[0] < pair[1], "indices are in increasing order");
+        AlgorithmsCheck.equal(13, nums[pair[0]] + nums[pair[1]], "indices point at values that sum to target");
     }
 
     public static void main(String[] args) {
         run();
-        Check.finish();
+        AlgorithmsCheck.finish();
     }
 }

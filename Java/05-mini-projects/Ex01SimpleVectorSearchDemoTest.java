@@ -18,38 +18,38 @@ public class Ex01SimpleVectorSearchDemoTest {
 
     static void run() {
         // Cosine similarity
-        Check.equal(1.0, Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 1, 2 }, new double[] { 1, 2 }), 1e-9,
+        MiniProjectsCheck.equal(1.0, Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 1, 2 }, new double[] { 1, 2 }), 1e-9,
                 "identical vectors score 1");
-        Check.equal(0.0, Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 1, 0 }, new double[] { 0, 1 }), 1e-9,
+        MiniProjectsCheck.equal(0.0, Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 1, 0 }, new double[] { 0, 1 }), 1e-9,
                 "orthogonal vectors score 0");
-        Check.throwsIllegalArgument(
+        MiniProjectsCheck.throwsIllegalArgument(
                 () -> Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 1, 0 }, new double[] { 1, 0, 0 }),
                 "dimension mismatch throws");
-        Check.throwsIllegalArgument(
+        MiniProjectsCheck.throwsIllegalArgument(
                 () -> Ex01SimpleVectorSearchDemo.cosineSimilarity(new double[] { 0, 0 }, new double[] { 1, 0 }),
                 "zero vector throws");
 
         // Search
         List<Ex01SimpleVectorSearchDemo.DocumentVector> docs = List.of(doc("a", 1, 0), doc("b", 1, 1), doc("c", 0, 1));
-        Check.equal(List.of("a", "b", "c"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0.1 }, docs, 3)),
+        MiniProjectsCheck.equal(List.of("a", "b", "c"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0.1 }, docs, 3)),
                 "results ranked by score");
-        Check.equal(List.of("c", "b", "a"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 0, 1 }, docs, 3)),
+        MiniProjectsCheck.equal(List.of("c", "b", "a"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 0, 1 }, docs, 3)),
                 "ranks correctly when the best match comes last");
-        Check.equal(List.of("a", "b"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0.1 }, docs, 2)),
+        MiniProjectsCheck.equal(List.of("a", "b"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0.1 }, docs, 2)),
                 "top-k keeps only the best results");
         List<Ex01SimpleVectorSearchDemo.DocumentVector> tied = List.of(doc("first", 1, 0), doc("second", 1, 0));
-        Check.equal(List.of("first", "second"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, tied, 2)),
+        MiniProjectsCheck.equal(List.of("first", "second"), ids(Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, tied, 2)),
                 "tied scores keep document order (List.sort is stable)");
-        Check.equal(3, Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, docs, 10).size(),
+        MiniProjectsCheck.equal(3, Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, docs, 10).size(),
                 "top-k larger than corpus returns all");
-        Check.equal(0, Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, List.of(), 3).size(),
+        MiniProjectsCheck.equal(0, Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, List.of(), 3).size(),
                 "empty corpus returns no results");
-        Check.throwsIllegalArgument(() -> Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, docs, 0),
+        MiniProjectsCheck.throwsIllegalArgument(() -> Ex01SimpleVectorSearchDemo.search(new double[] { 1, 0 }, docs, 0),
                 "non-positive top-k throws");
     }
 
     public static void main(String[] args) {
         run();
-        Check.finish();
+        MiniProjectsCheck.finish();
     }
 }

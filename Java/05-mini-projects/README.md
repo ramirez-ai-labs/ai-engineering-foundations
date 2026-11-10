@@ -102,10 +102,10 @@ From this folder:
 javac *.java
 java Ex01SimpleVectorSearchDemo
 java Ex02KnowledgeGraphBFS
-java AllTests
+java MiniProjectsTests
 ```
 
-`AllTests` covers cosine similarity, top-k ranking, and input validation in the vector search, plus hop limits, discovery order, directed edges, and cycles in the knowledge graph BFS. See [01-data-structures/README.md](../01-data-structures/README.md#testing) for how the tests work.
+`MiniProjectsTests` covers cosine similarity, top-k ranking, and input validation in the vector search, plus hop limits, discovery order, directed edges, and cycles in the knowledge graph BFS. See [01-data-structures/README.md](../01-data-structures/README.md#testing) for how the tests work.
 
 What the vector search demo intentionally simplifies:
 

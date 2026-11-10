@@ -51,7 +51,7 @@ If a learner is weak on these basics, later AI topics often feel magical. If the
 | `Ex03LinkedListDemo.java` | nodes, references, traversal, head insertion, removal, reversal, slow/fast pointers | linked lists teach pointer-style thinking and tradeoffs vs arrays |
 | `Ex04TreeBasics.java` | binary tree structure, in-/pre-/post-order and level-order traversal, height, BST insert and lookup | trees build recursive reasoning used in many CS topics |
 | `Ex05GraphDFSAndBFS.java` | adjacency lists, iterative and recursive DFS, BFS, BFS shortest path, visited tracking | graphs model relationships, pipelines, dependencies, and search spaces |
-| `*Test.java`, `AllTests.java`, `Check.java` | tests for the linked list, tree, and graph files | lets you check a from-scratch rewrite (see [Testing](#testing)) |
+| `*Test.java`, `DataStructuresTests.java`, `DataStructuresCheck.java` | tests for the linked list, tree, and graph files | lets you check a from-scratch rewrite (see [Testing](#testing)) |
 
 ## Suggested Order
 
@@ -76,14 +76,14 @@ java Ex02HashMapExamples
 java Ex03LinkedListDemo
 java Ex04TreeBasics
 java Ex05GraphDFSAndBFS
-java AllTests
+java DataStructuresTests
 ```
 
 ## Testing
 
-`java AllTests` runs every test in this folder. Each `*Test.java` file also runs on its own, for example `java Ex03LinkedListDemoTest`. A failure prints `FAIL <name>: expected <...> but was <...>`, and the run exits with status 1.
+`java DataStructuresTests` runs every test in this folder. Each `*Test.java` file also runs on its own, for example `java Ex03LinkedListDemoTest`. A failure prints `FAIL <name>: expected <...> but was <...>`, and the run exits with status 1.
 
-The tests need no JUnit download. `Check.java` is a small assertion helper, and an identical copy sits in each chapter folder so every folder still compiles with `javac *.java`. A real project would use JUnit.
+The tests need no JUnit download. `DataStructuresCheck.java` is a small assertion helper. Each chapter folder has its own copy with a chapter-specific name (`AlgorithmsCheck`, `SystemsCheck`, `MiniProjectsCheck`), and its own runner (`AlgorithmsTests`, ...). Every folder still compiles with `javac *.java`, and the names never clash when an IDE opens `Java/` as one project. A real project would use JUnit and packages.
 
 To re-implement a method from scratch:
 

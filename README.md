@@ -58,7 +58,7 @@ Inside each folder, files are numbered from easiest to hardest, so a file listin
 | Java | `Ex01ArrayExamples.java`, `Ex02HashMapExamples.java`, ... | tests sit beside their class as `Ex03LinkedListDemoTest.java` |
 | Notes | `01-EmbeddingsAndVectorSearch.md`, ... | `Java/04-ai-foundations/`, shared by both tracks |
 
-The `ex`/`Ex` prefix exists because neither language allows a name to start with a digit: Python cannot import a module named `01_...`, and a Java class cannot be named `01...`. Numbering restarts in each chapter, and the same number means the same lesson in both tracks. Unnumbered files such as `Check.java`, `FakeClock.java`, and `AllTests.java` are test support.
+The `ex`/`Ex` prefix exists because neither language allows a name to start with a digit: Python cannot import a module named `01_...`, and a Java class cannot be named `01...`. Numbering restarts in each chapter, and the same number means the same lesson in both tracks. Unnumbered Java files such as `DataStructuresTests.java`, `DataStructuresCheck.java`, and `FakeClock.java` are test support.
 
 The intended progression is:
 
@@ -143,7 +143,7 @@ Every chapter with code also has tests, with no JUnit or build tool to install. 
 ```bash
 cd Java/01-data-structures
 javac *.java
-java AllTests
+java DataStructuresTests
 ```
 
 See [Java/01-data-structures/README.md](Java/01-data-structures/README.md#testing) for how they work.

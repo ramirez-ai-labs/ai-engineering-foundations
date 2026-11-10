@@ -14,39 +14,39 @@ public class Ex05LRUCacheTest {
     }
 
     static void run() {
-        Check.throwsIllegalArgument(() -> new Ex05LRUCache<String, String>(0), "rejects zero capacity");
-        Check.throwsIllegalArgument(() -> new Ex05LRUCache<String, String>(-1), "rejects negative capacity");
+        SystemsCheck.throwsIllegalArgument(() -> new Ex05LRUCache<String, String>(0), "rejects zero capacity");
+        SystemsCheck.throwsIllegalArgument(() -> new Ex05LRUCache<String, String>(-1), "rejects negative capacity");
 
         // Basic operations
         Ex05LRUCache<String, String> cache = new Ex05LRUCache<>(2);
-        Check.isNull(cache.get("missing"), "get missing returns null");
-        Check.equal(List.of(), cache.keysMostRecentFirst(), "empty cache has no keys");
+        SystemsCheck.isNull(cache.get("missing"), "get missing returns null");
+        SystemsCheck.equal(List.of(), cache.keysMostRecentFirst(), "empty cache has no keys");
         cache.put("a", "old");
         cache.put("a", "new");
-        Check.equal("new", cache.get("a"), "put existing key updates value");
-        Check.equal(1, cache.size(), "update keeps one entry");
+        SystemsCheck.equal("new", cache.get("a"), "put existing key updates value");
+        SystemsCheck.equal(1, cache.size(), "update keeps one entry");
 
         // Eviction
         cache = filled(3, "a", "b", "c", "d");
-        Check.isNull(cache.get("a"), "evicts the oldest key when none were read");
-        Check.equal(List.of("d", "c", "b"), cache.keysMostRecentFirst(), "recency order after eviction");
+        SystemsCheck.isNull(cache.get("a"), "evicts the oldest key when none were read");
+        SystemsCheck.equal(List.of("d", "c", "b"), cache.keysMostRecentFirst(), "recency order after eviction");
 
         cache = filled(3, "a", "b", "c");
         cache.get("a");
         cache.put("d", "D");
-        Check.isNull(cache.get("b"), "get protects a key: b is evicted instead of a");
-        Check.equal("A", cache.get("a"), "recently read key survives");
+        SystemsCheck.isNull(cache.get("b"), "get protects a key: b is evicted instead of a");
+        SystemsCheck.equal("A", cache.get("a"), "recently read key survives");
 
         cache = filled(3, "a", "b", "c");
         cache.put("a", "A2");
-        Check.equal(3, cache.size(), "update does not evict");
+        SystemsCheck.equal(3, cache.size(), "update does not evict");
         cache.put("d", "D");
-        Check.isNull(cache.get("b"), "update counts as a use");
-        Check.equal("A2", cache.get("a"), "updated key survives");
+        SystemsCheck.isNull(cache.get("b"), "update counts as a use");
+        SystemsCheck.equal("A2", cache.get("a"), "updated key survives");
 
         cache = filled(2, "a", "b");
         cache.get("zzz");
-        Check.equal(List.of("b", "a"), cache.keysMostRecentFirst(), "a missing get does not change order");
+        SystemsCheck.equal(List.of("b", "a"), cache.keysMostRecentFirst(), "a missing get does not change order");
 
         Ex05LRUCache<String, String> bounded = new Ex05LRUCache<>(3);
         boolean neverOver = true;
@@ -56,17 +56,17 @@ public class Ex05LRUCacheTest {
                 neverOver = false;
             }
         }
-        Check.isTrue(neverOver, "size never exceeds capacity");
-        Check.equal(List.of("99", "98", "97"), bounded.keysMostRecentFirst(), "keeps the most recent keys");
+        SystemsCheck.isTrue(neverOver, "size never exceeds capacity");
+        SystemsCheck.equal(List.of("99", "98", "97"), bounded.keysMostRecentFirst(), "keeps the most recent keys");
 
         cache = filled(1, "a", "b");
-        Check.isNull(cache.get("a"), "capacity one evicts on every new key");
-        Check.equal("B", cache.get("b"), "capacity one keeps the newest key");
+        SystemsCheck.isNull(cache.get("a"), "capacity one evicts on every new key");
+        SystemsCheck.equal("B", cache.get("b"), "capacity one keeps the newest key");
 
         cache = filled(2, "a", "b", "c");
         cache.put("a", "back");
-        Check.equal("back", cache.get("a"), "an evicted key can be added again");
-        Check.equal(List.of("a", "c"), cache.keysMostRecentFirst(), "order after re-adding");
+        SystemsCheck.equal("back", cache.get("a"), "an evicted key can be added again");
+        SystemsCheck.equal(List.of("a", "c"), cache.keysMostRecentFirst(), "order after re-adding");
 
         // A broken prev pointer would pass every forward-only check above.
         cache = filled(4, "a", "b", "c", "d", "e");
@@ -74,11 +74,11 @@ public class Ex05LRUCacheTest {
         cache.put("b", "B2");
         List<String> forwards = new ArrayList<>(cache.keysMostRecentFirst());
         Collections.reverse(forwards);
-        Check.equal(forwards, cache.keysLeastRecentFirst(), "walking backwards matches walking forwards");
+        SystemsCheck.equal(forwards, cache.keysLeastRecentFirst(), "walking backwards matches walking forwards");
     }
 
     public static void main(String[] args) {
         run();
-        Check.finish();
+        SystemsCheck.finish();
     }
 }
