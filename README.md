@@ -93,10 +93,7 @@ Recommended approach:
 │   ├── 03-systems/
 │   ├── 04-ai-foundations/
 │   └── 05-mini-projects/
-├── resources/
-├── blog-assets/
-├── talks/
-└── workshop-notes/
+└── resources/
 ```
 
 Folder purpose:
@@ -106,7 +103,7 @@ Folder purpose:
 - `03-systems/`: caches, queues, rate limiting, and API design basics
 - `04-ai-foundations/`: the AI concepts learners need before building LLM systems
 - `05-mini-projects/`: integrated practice projects that combine several ideas
-- `resources/`: supporting notes, positioning, and study material
+- `resources/`: the place for companion study material such as reading lists and checklists (none yet)
 
 ## Language Choice
 
@@ -126,7 +123,7 @@ The written notes in `Java/04-ai-foundations/` and `Java/03-systems/RestApiDesig
 
 ### Java
 
-Each numbered folder contains small Java files with a `main` method.
+JDK 11 or newer is required, with no build tool or libraries to install. Each numbered folder except `04-ai-foundations/`, which holds written notes, contains small Java files with a `main` method.
 
 Example:
 

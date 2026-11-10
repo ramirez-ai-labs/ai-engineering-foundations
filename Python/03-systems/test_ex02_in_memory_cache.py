@@ -23,6 +23,19 @@ class FakeClock:
         self.now += seconds
 
 
+class ValidationTest(unittest.TestCase):
+    def test_rejects_nan_and_infinite_ttl(self) -> None:
+        # A NaN TTL would silently mean "never expire" and serve stale data.
+        for ttl in [float("nan"), float("inf")]:
+            with self.assertRaises(ValueError):
+                InMemoryCache(ttl_seconds=ttl)
+
+    def test_zero_and_negative_ttl_still_mean_no_expiry(self) -> None:
+        # The documented way to turn expiry off keeps working.
+        InMemoryCache(ttl_seconds=0)
+        InMemoryCache(ttl_seconds=-1)
+
+
 class BasicOperationsTest(unittest.TestCase):
     def test_put_then_get(self) -> None:
         cache = InMemoryCache()

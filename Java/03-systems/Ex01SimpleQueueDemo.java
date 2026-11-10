@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
@@ -6,11 +6,17 @@ import java.util.Queue;
  *
  * In AI systems: job queues for inference, event queues for pipelines,
  * or any "process in order" workload.
+ *
+ * ArrayDeque is the recommended single-threaded Queue: a circular array with
+ * O(1) offer and poll, and better memory locality than LinkedList, which
+ * allocates a node per element. It matches Python's collections.deque. For
+ * producer/consumer work across threads use a BlockingQueue; across processes
+ * or services use a broker (SQS, Redis Streams, Kafka).
  */
 public class Ex01SimpleQueueDemo {
 
     public static void main(String[] args) {
-        Queue<String> queue = new LinkedList<>();
+        Queue<String> queue = new ArrayDeque<>();
 
         // Enqueue
         queue.offer("first");

@@ -15,12 +15,18 @@ Limitations: it is not thread-safe, and it has no maximum size, so a real cache
 would also need an eviction policy such as LRU to keep memory bounded.
 """
 
+import math
 import time
 
 
 class InMemoryCache:
     def __init__(self, ttl_seconds: float = 0.0) -> None:
         """ttl_seconds <= 0 means entries never expire."""
+        # Without this check, NaN would fail "self._ttl > 0" in put() and
+        # silently mean "never expire", serving stale data forever. Use 0 to
+        # turn expiry off on purpose.
+        if not math.isfinite(ttl_seconds):
+            raise ValueError("ttl_seconds must be a finite number (use 0 for no expiry)")
         self._ttl = ttl_seconds
         # Two dicts share the same keys: one for values, one for expiry times.
         self._values: dict[str, str] = {}
