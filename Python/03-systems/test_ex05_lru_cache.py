@@ -94,8 +94,11 @@ class LinkIntegrityTest(unittest.TestCase):
         cache.put("b", "B2")
 
         forwards = cache.keys_most_recent_first()
-        forwards.reverse()
-        self.assertEqual(cache.keys_least_recent_first(), forwards)
+        # Python shortcut: forwards.reverse() or forwards[::-1]
+        expected_backwards: list[str] = []
+        for index in range(len(forwards) - 1, -1, -1):
+            expected_backwards.append(forwards[index])
+        self.assertEqual(cache.keys_least_recent_first(), expected_backwards)
 
 
 if __name__ == "__main__":

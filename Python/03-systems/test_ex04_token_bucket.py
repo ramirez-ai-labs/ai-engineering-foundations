@@ -31,20 +31,30 @@ def count_allowed(bucket: TokenBucket, attempts: int) -> int:
     return allowed
 
 
+def count_true(outcomes: list[bool]) -> int:
+    """How many calls were allowed. Python shortcut: outcomes.count(True)"""
+    allowed = 0
+    for outcome in outcomes:
+        if outcome:
+            allowed += 1
+    return allowed
+
+
 class ValidationTest(unittest.TestCase):
     def test_rejects_non_positive_settings(self) -> None:
-        for capacity, rate in [(0, 1.0), (-1, 1.0), (1, 0.0), (1, -2.0)]:
+        # Each case is (capacity, refill_per_second).
+        for case in [(0, 1.0), (-1, 1.0), (1, 0.0), (1, -2.0)]:
             with self.assertRaises(ValueError):
-                TokenBucket(capacity, rate)
+                TokenBucket(case[0], case[1])
 
     def test_rejects_nan_and_infinite_settings(self) -> None:
         # NaN slips past "<= 0" because it fails every comparison; infinite
         # capacity would allow every request. Both must be rejected up front.
         nan = float("nan")
         inf = float("inf")
-        for capacity, rate in [(nan, 1.0), (inf, 1.0), (1, nan), (1, inf)]:
+        for case in [(nan, 1.0), (inf, 1.0), (1, nan), (1, inf)]:
             with self.assertRaises(ValueError):
-                TokenBucket(capacity, rate)
+                TokenBucket(case[0], case[1])
 
     def test_rejects_non_positive_cost(self) -> None:
         bucket = TokenBucket(capacity=5, refill_per_second=1)
@@ -138,7 +148,7 @@ class ConcurrencyTest(unittest.TestCase):
         for thread in threads:
             thread.join()
 
-        self.assertEqual(results.count(True), 10)
+        self.assertEqual(count_true(results), 10)
 
 
 if __name__ == "__main__":

@@ -31,11 +31,21 @@ def count_allowed(limiter: RateLimiter, attempts: int) -> int:
     return allowed
 
 
+def count_true(outcomes: list[bool]) -> int:
+    """How many calls were allowed. Python shortcut: outcomes.count(True)"""
+    allowed = 0
+    for outcome in outcomes:
+        if outcome:
+            allowed += 1
+    return allowed
+
+
 class ValidationTest(unittest.TestCase):
     def test_rejects_non_positive_settings(self) -> None:
-        for max_requests, window in [(0, 1.0), (-1, 1.0), (1, 0.0), (1, -5.0)]:
+        # Each case is (max_requests, window_seconds).
+        for case in [(0, 1.0), (-1, 1.0), (1, 0.0), (1, -5.0)]:
             with self.assertRaises(ValueError):
-                RateLimiter(max_requests, window)
+                RateLimiter(case[0], case[1])
 
     def test_rejects_nan_and_infinite_window(self) -> None:
         # A NaN window slips past "<= 0" and never resets, so the limiter would
@@ -107,7 +117,7 @@ class ConcurrencyTest(unittest.TestCase):
             thread.join()
 
         self.assertEqual(len(results), 160)
-        self.assertEqual(results.count(True), 10)
+        self.assertEqual(count_true(results), 10)
 
 
 if __name__ == "__main__":

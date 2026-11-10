@@ -122,6 +122,7 @@ def main() -> None:
 
     print("Top search results for query embedding:")
     for result in top_results:
+        # ":.4f" is display formatting only: print the score with 4 decimals.
         print(f"{result.id} | score={result.score:.4f} | {result.text}")
 
     print()

@@ -19,9 +19,10 @@ class MergeTest(unittest.TestCase):
 
 
 class CopyRangeTest(unittest.TestCase):
-    def test_matches_slicing(self) -> None:
+    def test_copies_start_up_to_but_not_including_end(self) -> None:
         values = [5, 6, 7, 8]
-        self.assertEqual(copy_range(values, 1, 3), values[1:3])
+        self.assertEqual(copy_range(values, 1, 3), [6, 7])
+        self.assertEqual(copy_range(values, 0, 4), [5, 6, 7, 8])
         self.assertEqual(copy_range(values, 0, 0), [])
 
 
@@ -49,7 +50,10 @@ class MergeSortTest(unittest.TestCase):
         values = [1]
         self.assertIsNot(merge_sort(values), values)
 
-    def test_matches_builtin_sorted_on_random_input(self) -> None:
+    def test_sorts_random_input(self) -> None:
+        # A correct sort has two properties, checked separately:
+        #   1. every item is <= the item after it (the output is in order)
+        #   2. it holds exactly the input's items (nothing lost or invented)
         # A fixed seed keeps the test repeatable.
         generator = random.Random(42)
         for trial in range(50):
@@ -57,7 +61,13 @@ class MergeSortTest(unittest.TestCase):
             values: list[int] = []
             for position in range(size):
                 values.append(generator.randint(-20, 20))
-            self.assertEqual(merge_sort(values), sorted(values), values)
+
+            result = merge_sort(values)
+
+            for index in range(len(result) - 1):
+                self.assertLessEqual(result[index], result[index + 1], values)
+            # Same items, each the same number of times, in any order.
+            self.assertCountEqual(result, values)
 
 
 if __name__ == "__main__":

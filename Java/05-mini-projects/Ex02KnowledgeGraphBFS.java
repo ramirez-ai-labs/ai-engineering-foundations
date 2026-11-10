@@ -140,10 +140,8 @@ public class Ex02KnowledgeGraphBFS {
 
         List<ReachedNode> subgraph = bfsWithinHops(graph, queryNode, maxHops);
 
-        System.out.printf("%-20s | %5s | %s%n", "Node", "Hops", "Path");
-        System.out.println("--------------------------------------------------------------------------------");
         for (ReachedNode n : subgraph) {
-            System.out.printf("%-20s | %5d | %s%n", n.node, n.hops, n.path);
+            System.out.println(n.node + " | hops=" + n.hops + " | " + n.path);
         }
 
         System.out.println();

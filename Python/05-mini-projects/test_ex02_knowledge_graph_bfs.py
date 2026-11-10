@@ -29,7 +29,8 @@ class BfsWithinHopsTest(unittest.TestCase):
 
     def test_hop_counts(self) -> None:
         for item in bfs_within_hops(self.graph, "Embeddings", 2):
-            if item.node in ("RAG", "VectorDatabase"):
+            # RAG and VectorDatabase are Embeddings' direct neighbors.
+            if item.node == "RAG" or item.node == "VectorDatabase":
                 self.assertEqual(item.hops, 1, item.node)
             else:
                 self.assertEqual(item.hops, 2, item.node)

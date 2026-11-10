@@ -55,7 +55,7 @@ def main() -> None:
 
     # Pitfall: this shortcut creates three references to the SAME inner list,
     # so one write appears to change every row.
-    shared_rows = [[0] * 3] * 3
+    shared_rows = [[0] * 3] * 3  # shortcut-ok: this pitfall is the lesson
     shared_rows[0][0] = 1
 
     # Creating a new inner list on each pass gives independent rows.
