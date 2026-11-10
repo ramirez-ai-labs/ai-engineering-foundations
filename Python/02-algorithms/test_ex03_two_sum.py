@@ -41,7 +41,9 @@ class TwoSumTest(unittest.TestCase):
     def test_indices_point_at_values_that_sum_to_target(self) -> None:
         nums = [10, -2, 7, 5, 8, 1]
         for implementation in IMPLEMENTATIONS:
-            first, second = implementation(nums, 13)
+            pair = implementation(nums, 13)
+            first = pair[0]
+            second = pair[1]
             self.assertLess(first, second)
             self.assertEqual(nums[first] + nums[second], 13)
 

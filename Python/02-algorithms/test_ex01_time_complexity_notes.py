@@ -17,8 +17,12 @@ class TimeComplexityNotesTest(unittest.TestCase):
 
     def test_count_pairs_is_n_choose_2(self) -> None:
         for n in range(8):
+            # count_pairs only looks at the length, so any n items will do.
+            values: list[int] = []
+            for item in range(n):
+                values.append(item)
             expected = n * (n - 1) // 2
-            self.assertEqual(count_pairs(list(range(n))), expected, n)
+            self.assertEqual(count_pairs(values), expected, n)
 
 
 if __name__ == "__main__":

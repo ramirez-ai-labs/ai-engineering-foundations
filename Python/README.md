@@ -20,12 +20,35 @@ for index in range(len(numbers)):
     print(f"[{index}]={numbers[index]}", end=" ")
 ```
 
-A few features stay because they are the lesson or the safe choice:
+The rule covers every file in this track, tests included. The code does not use:
+
+- comprehensions, generator expressions, or `lambda`
+- conditional expressions (`a if c else b`) or the walrus operator (`:=`)
+- tuple unpacking (`a, b = pair`, `for key, value in ...`) or chained assignment
+- slicing (`items[1:3]`, `items[::-1]`)
+- chained comparisons (`a < b < c`) or membership in a literal (`x in ("a", "b")`)
+- repetition (`[0] * n`, `"-" * n`)
+- built-ins and methods that hide a loop, such as `sum`, `max`, `min`, `sorted`, `reversed`, `enumerate`, `zip`, `any`, `all`, `list(...)`, `str.join`, `.items()`, `.count()`, `.reverse()`, and `.sort()`
+
+A few features stay because they are the lesson, the safe choice, or not hiding any logic:
 
 - `collections.deque`: the queue data structure being taught
 - `dict.get`: part of the hash map lesson
 - `with self._lock`: guarantees a lock is released, which is easy to get wrong by hand
+- `math.sqrt` and `math.isfinite`: arithmetic, not a hidden loop
+- f-strings, including display formatting such as `:.4f` (four decimal places)
 - type hints on function signatures, empty containers, and attributes that start as `None`, where the value alone does not show the type
+- in tests, `unittest` assertions such as `assertCountEqual` ("same items, any order") and `unittest.mock.patch`
+
+One line breaks the rule on purpose: `[[0] * 3] * 3` in `ex01_array_examples.py`, because that shortcut's shared-row bug is the lesson. It is marked `# shortcut-ok:`.
+
+To check the whole track, run this from the repository root:
+
+```bash
+python scripts/check_python_shortcuts.py
+```
+
+It exits with status 1 and lists the file and line of any shortcut that is not marked `# shortcut-ok: <reason>`.
 
 ## Chapters
 

@@ -45,13 +45,15 @@ class TraversalCoverageTest(unittest.TestCase):
         triangle = build_graph(3, [(0, 1), (1, 2), (2, 0)])
         for traversal in self.TRAVERSALS:
             order = traversal(triangle, 0)
-            self.assertEqual(sorted(order), [0, 1, 2], traversal.__name__)
+            # assertCountEqual: same items, each the same number of times, in any
+            # order. A repeated node would make the counts differ.
+            self.assertCountEqual(order, [0, 1, 2], traversal.__name__)
 
     def test_only_reachable_nodes_are_visited(self) -> None:
         # Two components: 0-1 and 2-3.
         split = build_graph(4, [(0, 1), (2, 3)])
         for traversal in self.TRAVERSALS:
-            self.assertEqual(sorted(traversal(split, 0)), [0, 1], traversal.__name__)
+            self.assertCountEqual(traversal(split, 0), [0, 1], traversal.__name__)
 
     def test_single_isolated_node(self) -> None:
         for traversal in self.TRAVERSALS:

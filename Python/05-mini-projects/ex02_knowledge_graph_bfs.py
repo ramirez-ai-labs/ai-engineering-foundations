@@ -123,10 +123,8 @@ def main() -> None:
 
     subgraph = bfs_within_hops(graph, query_node, max_hops)
 
-    print(f"{'Node':<20} | {'Hops':>4} | Path")
-    print("-" * 80)
     for reached in subgraph:
-        print(f"{reached.node:<20} | {reached.hops:>4} | {reached.path}")
+        print(f"{reached.node} | hops={reached.hops} | {reached.path}")
 
     print()
     print(f"Retrieved subgraph ({len(subgraph)} nodes within {max_hops} hops).")
