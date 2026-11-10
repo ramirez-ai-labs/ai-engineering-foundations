@@ -87,7 +87,7 @@ When contributing to this repo:
 - Default language for CS examples is **Java** unless a different language is clearly more appropriate.
 - Use **Python** when the topic is naturally ML/AI-first, notebook-oriented, or ecosystem-constrained.
 - Use **TypeScript** for frontend or typed scripting work when needed.
-- The `Python/` track teaches the same chapters for beginners and people refreshing. Write explicit logic there instead of Python shortcuts such as comprehensions, `enumerate`, or `sum`, and use a `Python shortcut:` comment to name the built-in version where it helps.
+- The `Python/` track teaches the same chapters for beginners and people refreshing. Write explicit logic there instead of Python shortcuts such as comprehensions, `enumerate`, or `sum`, and use a `Python shortcut:` comment to name the built-in version where it helps. The rule covers tests too; the full list of what is avoided and allowed is in `Python/README.md`. Run `python scripts/check_python_shortcuts.py` before committing Python changes. A deliberate exception needs a trailing `# shortcut-ok: <reason>` comment.
 - If introducing a new language, explain why it is the right choice for that folder or example.
 
 ### Educational Bias
