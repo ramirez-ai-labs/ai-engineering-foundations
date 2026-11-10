@@ -20,11 +20,17 @@ import time
 class RateLimiter:
     def __init__(self, max_requests: int, window_seconds: float) -> None:
         """Allow at most max_requests per window_seconds."""
+        # max_requests is a count, so it must be a whole number. Checking the
+        # type also rejects NaN, which "max_requests <= 0" alone would let
+        # through, after which "count < NaN" is always False and every request
+        # is blocked.
+        if not isinstance(max_requests, int) or max_requests <= 0:
+            raise ValueError("max_requests must be a positive whole number")
         # math.isfinite rejects NaN, which "window_seconds <= 0" would let through
         # (NaN fails every comparison, so the window would never reset), and
         # infinity, which would also mean a window that never resets.
-        if max_requests <= 0 or not math.isfinite(window_seconds) or window_seconds <= 0:
-            raise ValueError("max_requests and window_seconds must be positive finite numbers")
+        if not math.isfinite(window_seconds) or window_seconds <= 0:
+            raise ValueError("window_seconds must be a positive finite number")
         self._max_requests = max_requests
         self._window = window_seconds
         self._window_start = time.monotonic()

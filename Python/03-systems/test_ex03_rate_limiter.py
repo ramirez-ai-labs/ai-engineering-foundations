@@ -44,6 +44,13 @@ class ValidationTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 RateLimiter(2, window)
 
+    def test_rejects_non_whole_max_requests(self) -> None:
+        # A NaN count slips past "<= 0", and then "count < NaN" blocks every
+        # request; a fractional count has no clear meaning.
+        for max_requests in [float("nan"), 2.5]:
+            with self.assertRaises(ValueError):
+                RateLimiter(max_requests, 1.0)  # type: ignore[arg-type]
+
 
 class FixedWindowTest(unittest.TestCase):
     def setUp(self) -> None:
