@@ -27,3 +27,6 @@ replay_pid*
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Blanked lessons and your rewrites from scripts/kata.py
+practice/
