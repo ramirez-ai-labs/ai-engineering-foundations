@@ -75,6 +75,17 @@ Recommended approach:
 4. Re-implement the example without looking.
 5. Explain how the concept shows up in AI engineering.
 
+For step 4 in the Python track, `scripts/kata.py` gives you a blank to fill in and checks it against the lesson's own tests. The lesson itself is never changed: the blank copy goes to `practice/`, which is gitignored, and code there is not held to the track's no-shortcuts rule.
+
+```bash
+python scripts/kata.py list                      # every lesson that has tests
+python scripts/kata.py start ex05_lru_cache      # bodies blanked; signatures, docstrings, fields kept
+python scripts/kata.py test ex05_lru_cache       # run the lesson's tests on your rewrite
+python scripts/kata.py diff ex05_lru_cache       # compare with the lesson once you pass
+```
+
+Add `--hard` to `start` to delete private helpers such as `_unlink` too, so you design the internals yourself.
+
 ## Repository Structure
 
 ```text
